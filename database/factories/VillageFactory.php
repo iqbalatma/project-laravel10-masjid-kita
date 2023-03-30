@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Village;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class VillageFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Village::class;
+
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->city,
+            'population' => $this->faker->numberBetween(100, 1000),
+            'postcode' => $this->faker->postcode,
         ];
     }
 }

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('population');
+            $table->string('postcode');
             $table->timestamps();
             $table->softDeletes();
         });
