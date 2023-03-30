@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/villages/index/" class='sidebar-link'>
+                    <a href="/village" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Kelurahan</span>
                     </a>

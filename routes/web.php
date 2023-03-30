@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/kelurahan', [VillageController::class, 'index'])->name('kelurahan');
+Route::get('/village', [VillageController::class, 'index'])->name('village');

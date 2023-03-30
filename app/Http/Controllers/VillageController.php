@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Village;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class VillageController extends Controller
 {
@@ -14,7 +15,7 @@ class VillageController extends Controller
      */
     public function index()
     {
-        //
+        return response(view('villages.index'));
     }
 
     /**
