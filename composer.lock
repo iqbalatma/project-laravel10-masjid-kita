@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8472242e79a0d722576701f8afeb6f72",
+    "content-hash": "0128ff22cbab715ba02684cbed656ebb",
     "packages": [
         {
             "name": "brick/math",
@@ -980,6 +980,50 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "iqbalatma/laravel-service-repo",
+            "version": "1.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iqbalatma/laravel-service-repo.git",
+                "reference": "43edaeca9d64106cbd21ba66dc9b06c3909f74e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iqbalatma/laravel-service-repo/zipball/43edaeca9d64106cbd21ba66dc9b06c3909f74e4",
+                "reference": "43edaeca9d64106cbd21ba66dc9b06c3909f74e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Iqbalatma\\LaravelServiceRepo\\ServiceRepoProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Iqbalatma\\LaravelServiceRepo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "iqbalatma",
+                    "email": "iqbalatma@gmail.com"
+                }
+            ],
+            "description": "Project for extend base class on laravel with service repo pattern",
+            "support": {
+                "issues": "https://github.com/iqbalatma/laravel-service-repo/issues",
+                "source": "https://github.com/iqbalatma/laravel-service-repo/tree/1.0.23"
+            },
+            "time": "2023-03-21T09:34:14+00:00"
         },
         {
             "name": "laravel/framework",
