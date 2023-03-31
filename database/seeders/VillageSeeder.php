@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Village;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Factories\VillageFactory;
 
 class VillageSeeder extends Seeder
 {
