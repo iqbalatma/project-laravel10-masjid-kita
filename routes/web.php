@@ -22,5 +22,6 @@ Route::get('/', function () {
 Route::prefix("masters")->name("masters.")->group(function () {
     Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
         Route::get("/", "index")->name("index");
+        Route::post("/", "store")->name("store");
     });
 });

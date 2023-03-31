@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Masters\Subdistricts\StoreSubdistrictRequest;
 use App\Services\Masters\SubdistrictService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SubdistrictController extends Controller
@@ -20,5 +20,14 @@ class SubdistrictController extends Controller
     {
         viewShare($service->getAllData());
         return response()->view("masters.subdistricts.index");
+    }
+
+    public function store(SubdistrictService $service, StoreSubdistrictRequest $request)
+    {
+        $response = $service->addNewData($request->validated());
+
+        if ($this->isError($response)) return $this->getErrorResponse();
+
+        return redirect()->back()->with(["success" => "Add new data subdistrict successfully"]);
     }
 }
