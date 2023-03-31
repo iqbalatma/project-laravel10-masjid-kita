@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Masters\Subdistricts\StoreSubdistrictRequest;
+use App\Http\Requests\Masters\Subdistricts\UpdateSubdistrictRequest;
 use App\Services\Masters\SubdistrictService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class SubdistrictController extends Controller
@@ -22,12 +24,30 @@ class SubdistrictController extends Controller
         return response()->view("masters.subdistricts.index");
     }
 
-    public function store(SubdistrictService $service, StoreSubdistrictRequest $request)
+
+    /**
+     * use to add new subdsitrcit
+     *
+     * @param SubdistrictService $service
+     * @param StoreSubdistrictRequest $request
+     * @return RedirectResponse
+     */
+    public function store(SubdistrictService $service, StoreSubdistrictRequest $request): RedirectResponse
     {
         $response = $service->addNewData($request->validated());
 
         if ($this->isError($response)) return $this->getErrorResponse();
 
         return redirect()->back()->with(["success" => "Add new data subdistrict successfully"]);
+    }
+
+
+    public function update(SubdistrictService $service, UpdateSubdistrictRequest $request, int $id): RedirectResponse
+    {
+        $response = $service->updateDataById($id, $request->validated());
+
+        if ($this->isError($response)) return $this->getErrorResponse();
+
+        return redirect()->back()->with(["success" => "Update data subdistrict successfully"]);
     }
 }

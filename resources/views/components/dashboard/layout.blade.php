@@ -40,8 +40,11 @@
             </div>
         </div>
     </div>
+    @vite("resources/js/app.js")
     <script src="{{ asset('mazer/dist/assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/js/app.js') }}"></script>
+
+    @stack('scripts')
 
 </body>
 
