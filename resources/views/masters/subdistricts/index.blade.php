@@ -38,7 +38,7 @@
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-subdistrict="{{ $subdistrict }}">
-                                Edit
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
                             </button>
                         </td>
                     </tr>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
+    <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
