@@ -50,4 +50,39 @@
         </div>
     </div>
     <!--table end -->
+
+    <!-- modal add new village -->
+    <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Village</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-add" class="row g-3" method="POST" action="">
+                        @csrf
+                        {{-- //TODO - select option for parent (district) --}}
+                        <div class="col-md-12">
+                            <label for="add-name" class="form-label">Nama Kelurahan</label>
+                            <input type="text" class="form-control" id="add-name" name="name">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="add-code" class="form-label">Populasi</label>
+                            <input type="text" class="form-control" id="add-population" name="code">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="add-code" class="form-label">Kode Pos</label>
+                            <input type="text" class="form-control" id="add-postcode" name="postcode">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="form-add" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </x-dashboard.layout>
