@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertical Navbar - Mazer Admin Dashboard</title>
+    <title>{{ $title ?? "Title" }}</title>
 
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/css/main/app.css') }}">
 
@@ -23,17 +23,10 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Vertical Layout with Navbar</h3>
-                                <p class="text-subtitle text-muted">Navbar will appear on the top of the page.</p>
+                                <h3>{{ $title ?? "Default Title" }}</h3>
+                                <p class="text-subtitle text-muted">{{ $description ?? "Default description" }}</p>
                             </div>
-                            <div class="col-12 col-md-6 order-md-2 order-first">
-                                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Layout Vertical Navbar</li>
-                                    </ol>
-                                </nav>
-                            </div>
+                            <x-dashboard.breadcumb></x-dashboard.breadcumb>
                         </div>
                     </div>
                     <section class="section">
