@@ -48,12 +48,6 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item  ">
-                    <a href="/village" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Kelurahan</span>
-                    </a>
-                </li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -63,6 +57,9 @@
                     <ul class="submenu ">
                         <li class="submenu-item ">
                             <a href="{{ route('masters.subdistricts.index') }}">Subdistrict</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('masters.villages.index') }}">Village</a>
                         </li>
                     </ul>
                 </li>

@@ -2,7 +2,7 @@
     <!-- Bordered table start -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="card-title">All Data Kelurahan</h4>
+            <h4 class="card-title">Data All Villages</h4>
 
             <!-- Button Add New Data  -->
             <div class="button-group">
@@ -13,6 +13,11 @@
             </div>
         </div>
         <div class="card-body table-responsive">
+
+            @if ($villages->count() == 0)
+            <x-empty-data></x-empty-data>
+            @else
+
             <!-- table  -->
             <table class="table">
                 <thead>
@@ -47,6 +52,7 @@
                 </tbody>
             </table>
             {{ $villages->withQueryString()->links() }}
+            @endif
         </div>
     </div>
     <!--table end -->

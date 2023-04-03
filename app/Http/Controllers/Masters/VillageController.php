@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Masters;
 
-use App\Models\Village;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Village;
+use Illuminate\Http\Response;
 
 class VillageController extends Controller
 {
@@ -17,7 +17,7 @@ class VillageController extends Controller
     public function index()
     {
         $villages = Village::latest()->paginate(10);
-        return response(view('villages.index', ['villages' => $villages]));
+        return response()->view("masters.villages.index", ['villages' => $villages]);
     }
 
     /**
