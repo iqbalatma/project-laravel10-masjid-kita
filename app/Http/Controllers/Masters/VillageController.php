@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Village;
+use App\Services\Masters\VillageService;
 use Illuminate\Http\Response;
 
 class VillageController extends Controller
@@ -12,22 +13,13 @@ class VillageController extends Controller
     /**
      * Display a listing of the resource.
      *
+     *  @param VillageService $service
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(VillageService $service): Response
     {
-        $villages = Village::latest()->paginate(10);
-        return response()->view("masters.villages.index", ['villages' => $villages]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        viewShare($service->getAllData());
+        return response()->view("masters.villages.index");
     }
 
     /**
@@ -48,17 +40,6 @@ class VillageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Village $village)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Village  $village
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Village $village)
     {
         //
     }

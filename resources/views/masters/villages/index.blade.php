@@ -13,7 +13,6 @@
             </div>
         </div>
         <div class="card-body table-responsive">
-
             @if ($villages->count() == 0)
             <x-empty-data></x-empty-data>
             @else
