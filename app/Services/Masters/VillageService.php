@@ -46,22 +46,22 @@ class VillageService extends BaseService implements VillageServiceInterface
      * @param array $requestedData
      * @return array
      */
-    // public function addNewData(array $requestedData): array
-    // {
-    //     try {
-    //         $this->repository->addNewData($requestedData);
-    //         $response = [
-    //             "success" => true,
-    //         ];
-    //     } catch (Exception $e) {
-    //         $response = [
-    //             "success" => false,
-    //             "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
-    //         ];
-    //     }
+    public function addNewData(array $requestedData): array
+    {
+        try {
+            $this->repository->addNewData($requestedData);
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => $e->getMessage()
+            ];
+        }
 
-    //     return $response;
-    // }
+        return $response;
+    }
 
 
     /**

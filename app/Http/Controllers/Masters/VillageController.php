@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Masters;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Village;
+use App\Http\Requests\Masters\Villages\StoreVillageRequest;
 use App\Services\Masters\VillageService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class VillageController extends Controller
@@ -25,12 +27,17 @@ class VillageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param VillageService $service
+     * @param StoreVillageRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(VillageService $service, StoreVillageRequest $request): RedirectResponse
     {
-        //
+        $response = $service->addNewData($request->validated());
+
+        if ($this->isError($response)) return $this->getErrorResponse()->withInput();
+
+        return redirect()->back()->with(["success" => "Add new data village successfully"]);
     }
 
     /**

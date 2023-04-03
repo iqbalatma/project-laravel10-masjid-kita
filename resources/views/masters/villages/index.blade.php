@@ -65,7 +65,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-add" class="row g-3" method="POST" action="">
+                    <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.villages.store') }}">
                         @csrf
                         {{-- //TODO - select option for parent (district) --}}
                         <div class="col-md-12">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="add-code" class="form-label">Populasi</label>
-                            <input type="text" class="form-control" id="add-population" name="code">
+                            <input type="text" class="form-control" id="add-population" name="population">
                         </div>
                         <div class="col-md-12">
                             <label for="add-code" class="form-label">Kode Pos</label>

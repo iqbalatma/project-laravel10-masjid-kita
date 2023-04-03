@@ -56,7 +56,7 @@ class SubdistrictService extends BaseService implements SubdistrictServiceInterf
         } catch (Exception $e) {
             $response = [
                 "success" => false,
-                "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
+                "message" => $e->getMessage()
             ];
         }
 

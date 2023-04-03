@@ -11,8 +11,8 @@ class Village extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name',
-        'population',
-        'postcode'
+        "name",
+        "population",
+        "postcode"
     ];
 }
