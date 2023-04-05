@@ -22,9 +22,8 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama Kelurahan</th>
-                        <th>Populasi</th>
-                        <th>Kode Pos</th>
+                        <th>Name</th>
+                        <th>Post Code</th>
                         <th>created_at</th>
                         <th>ACTION</th>
                     </tr>
@@ -34,7 +33,6 @@
                     <tr>
                         <td class="text-bold-500">{{ $villages->firstItem() + $key}}</td>
                         <td class="text-bold-500">{{ $row->name }}</td>
-                        <td class="text-bold-500">{{ $row->population }}</td>
                         <td class="text-bold-500">{{ $row->postcode }}</td>
                         <td class="text-bold-500">{{ $row->created_at }}</td>
                         <td align="left">
@@ -69,15 +67,11 @@
                         @csrf
                         {{-- //TODO - select option for parent (district) --}}
                         <div class="col-md-12">
-                            <label for="add-name" class="form-label">Nama Kelurahan</label>
+                            <label for="add-name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="add-name" name="name">
                         </div>
                         <div class="col-md-12">
-                            <label for="add-code" class="form-label">Populasi</label>
-                            <input type="text" class="form-control" id="add-population" name="population">
-                        </div>
-                        <div class="col-md-12">
-                            <label for="add-code" class="form-label">Kode Pos</label>
+                            <label for="add-code" class="form-label">Post Code</label>
                             <input type="text" class="form-control" id="add-postcode" name="postcode">
                         </div>
                     </form>

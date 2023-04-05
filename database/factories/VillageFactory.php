@@ -22,7 +22,6 @@ class VillageFactory extends Factory
     {
         return [
             'name' => $this->faker->city,
-            'population' => $this->faker->numberBetween(100, 1000),
             'postcode' => $this->faker->postcode,
         ];
     }

@@ -12,7 +12,6 @@ class Village extends Model
 
     protected $fillable = [
         "name",
-        "population",
         "postcode"
     ];
 }

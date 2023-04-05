@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Village;
-use App\Models\Subdistrict;
 use Illuminate\Database\Seeder;
-use Database\Factories\VillageFactory;
 use Illuminate\Support\Facades\Schema;
 
 class VillageSeeder extends Seeder
@@ -18,7 +16,7 @@ class VillageSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        Subdistrict::truncate();
+        Village::truncate();
         Schema::enableForeignKeyConstraints();
 
 
