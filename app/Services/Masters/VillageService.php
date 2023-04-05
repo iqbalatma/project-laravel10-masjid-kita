@@ -56,7 +56,7 @@ class VillageService extends BaseService implements VillageServiceInterface
         } catch (Exception $e) {
             $response = [
                 "success" => false,
-                "message" => $e->getMessage()
+                "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
             ];
         }
 
