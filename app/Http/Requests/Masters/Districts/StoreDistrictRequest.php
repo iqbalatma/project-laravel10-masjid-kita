@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Masters\Subdistricts;
+namespace App\Http\Requests\Masters\Districts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubdistrictRequest extends FormRequest
+class StoreDistrictRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreSubdistrictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "code" => "required|unique:subdistricts,code,NULL,id,deleted_at,NULL",
-            "name" => "required|max:255",
-            "district_id" => "numeric|required"
+            "name" => "required",
+            "code" => "required|unique:districts,code,NULL,id,deleted_at,NULL"
         ];
     }
 }
