@@ -10,5 +10,5 @@ class Subdistrict extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ["district_id", "name"];
+    protected $fillable = ["code", "district_id", "name"];
 }

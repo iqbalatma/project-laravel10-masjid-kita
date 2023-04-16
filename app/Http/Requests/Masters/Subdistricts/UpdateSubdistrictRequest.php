@@ -22,7 +22,7 @@ class UpdateSubdistrictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "code" => "required",
+            "code" => "required|unique:subdistricts,code,$this->id",
             "name" => "required|max:255",
             "district_id" => "numeric"
         ];
