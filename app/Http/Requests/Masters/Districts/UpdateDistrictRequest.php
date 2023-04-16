@@ -23,7 +23,7 @@ class UpdateDistrictRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "code" => "required|unique:districts,code,$this->id"
+            "code" => "required|unique:districts,code,$this->id,id,deleted_at,NULL"
         ];
     }
 }

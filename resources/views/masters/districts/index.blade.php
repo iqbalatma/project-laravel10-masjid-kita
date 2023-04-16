@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <form id="form-delete" action="{{ route('masters.subdistricts.destroy', ':id') }}" class="d-none" method="POST">
+    <form id="form-delete" action="{{ route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>

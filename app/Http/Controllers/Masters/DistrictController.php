@@ -57,4 +57,22 @@ class DistrictController extends Controller
 
         return redirect()->back()->with(["success" => "Perbaharui data kabupaten berhasil"]);
     }
+
+
+
+    /**
+     * Use to delete data by id
+     *
+     * @param DistrictService $service
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(DistrictService $service, int $id): RedirectResponse
+    {
+        $response = $service->deleteDataById($id);
+
+        if ($this->isError($response)) return $this->getErrorResponse();
+
+        return redirect()->back()->with(["success" => "Hapus data kabupaten berhasil"]);
+    }
 }

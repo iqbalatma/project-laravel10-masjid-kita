@@ -23,7 +23,7 @@ class StoreDistrictRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "code" => "required|unique:districts,code,$this->id"
+            "code" => "required|unique:districts,code,NULL,id,deleted_at,NULL"
         ];
     }
 }

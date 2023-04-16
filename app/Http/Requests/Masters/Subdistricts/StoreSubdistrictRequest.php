@@ -22,9 +22,9 @@ class StoreSubdistrictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "code" => "required|unique:subdistricts,code",
+            "code" => "required|unique:subdistricts,code,NULL,id,deleted_at,NULL",
             "name" => "required|max:255",
-            "district_id" => "numeric"
+            "district_id" => "numeric|required"
         ];
     }
 }
