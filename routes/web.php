@@ -24,12 +24,13 @@ Route::prefix("masters")->name("masters.")->group(function () {
     Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
         Route::get("/", "index")->name("index");
         Route::post("/", "store")->name("store");
-        Route::patch("/{id}", "update")->name("update");
+        Route::put("/{id}", "update")->name("update");
         Route::delete("/{id}", "destroy")->name("destroy");
     });
 
     Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
         Route::get("/", "index")->name("index");
+        Route::put("/{id}", "update")->name("update");
     });
     Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
         Route::get("/", "index")->name("index");

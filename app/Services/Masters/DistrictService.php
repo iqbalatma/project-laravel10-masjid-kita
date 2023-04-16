@@ -5,6 +5,7 @@ namespace App\Services\Masters;
 use App\Contracts\Interfaces\Masters\DistrictServiceInterface;
 use App\Repositories\Masters\DistrictRepository;
 use App\Services\BaseService;
+use Exception;
 
 class DistrictService extends BaseService implements DistrictServiceInterface
 {
@@ -18,6 +19,12 @@ class DistrictService extends BaseService implements DistrictServiceInterface
             "kabupaten" => route("masters.districts.index")
         ];
     }
+
+    /**
+     * Use to show all data districts
+     *
+     * @return array
+     */
     public function getAllData(): array
     {
         return [
@@ -26,5 +33,27 @@ class DistrictService extends BaseService implements DistrictServiceInterface
             "breadcumbs" => $this->getBreadcumbs(),
             "districts" => $this->repository->getAllDataPaginated()
         ];
+    }
+
+    public function updateDataById(int $id, array $requestedData): array
+    {
+        try {
+            $this->checkData($id);
+
+            $district = $this->getData();
+            $district->fill($requestedData);
+            $district->save();
+
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
+            ];
+        }
+
+        return $response;
     }
 }

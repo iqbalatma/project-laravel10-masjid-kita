@@ -56,20 +56,20 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-editLabel">Edit Subdistrict</h5>
+                    <h5 class="modal-title" id="modal-editLabel">Sunting Kabupaten</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.subdistricts.update', ':id') }}">
+                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.districts.update', ':id') }}">
                         @csrf
-                        @method("PATCH")
+                        @method("PUT")
                         <input type="hidden" name="district_id" value="1">
                         <div class="col-md-12">
-                            <label for="edit-code" class="form-label">Code</label>
+                            <label for="edit-code" class="form-label">Kode</label>
                             <input type="text" class="form-control" id="edit-code" name="code">
                         </div>
                         <div class="col-md-12">
-                            <label for="edit-name" class="form-label">Name</label>
+                            <label for="edit-name" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="edit-name" name="name">
                         </div>
                     </form>
@@ -119,6 +119,6 @@
     </form>
 
     @push("scripts")
-    @vite("resources/js/pages/masters/subdistricts/index.js")
+    @vite("resources/js/pages/masters/districts/index.js")
     @endpush
 </x-dashboard.layout>
