@@ -16,7 +16,6 @@ class Controller extends BaseController
     /**
      * Use to check is response from service error or not
      *
-     * @param array $response
      * @return bool
      */
     protected function isError(array $response, string $redirectRoute = null, array $params = []): bool

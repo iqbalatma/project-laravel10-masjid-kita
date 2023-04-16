@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
         "iqbalatma/laravel-service-repo": "^1.0",
+        "iqbalatma/sand-trail-driver": "^1.0",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"

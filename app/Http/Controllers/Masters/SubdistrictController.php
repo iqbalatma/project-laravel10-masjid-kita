@@ -42,6 +42,14 @@ class SubdistrictController extends Controller
     }
 
 
+    /**
+     * Use to update data subdistrict
+     *
+     * @param SubdistrictService $service
+     * @param UpdateSubdistrictRequest $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
     public function update(SubdistrictService $service, UpdateSubdistrictRequest $request, int $id): RedirectResponse
     {
         $response = $service->updateDataById($id, $request->validated());

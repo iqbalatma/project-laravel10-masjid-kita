@@ -9,7 +9,7 @@ let css = [
 
 let js = [
     "resources/js/app.js",
-    "resourecs/js/pages/masters/subdistricts/index.js"
+    "resources/js/pages/masters/subdistricts/index.js"
 ];
 export default defineConfig({
     plugins: [

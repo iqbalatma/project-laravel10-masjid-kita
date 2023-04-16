@@ -15,7 +15,6 @@
             @if ($subdistricts->count() == 0)
             <x-empty-data></x-empty-data>
             @else
-
             <table class="table">
                 <thead>
                     <tr>
