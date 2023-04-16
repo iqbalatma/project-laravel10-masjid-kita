@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'sandtrail'],
             'ignore_exceptions' => false,
         ],
 
@@ -68,6 +68,15 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+        ],
+
+        "sandtrail" => [
+            "driver" => "custom",
+            "via" =>  Iqbalatma\SandTrailDriver\SandTrailLogger::class,
+            'level' => env('LOG_LEVEL', 'debug'),
+            "host" =>  env("SANDTRAIL_HOST", "http://localhost"),
+            "client_id" =>  env("SANDTRAIL_CLIENT_ID", ""),
+            "secret_key" =>  env("SANDTRAIL_SECRET_KEY", "")
         ],
 
         'slack' => [

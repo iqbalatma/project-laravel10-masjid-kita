@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0128ff22cbab715ba02684cbed656ebb",
+    "content-hash": "95013ed1d88aa77c9ba982c606671075",
     "packages": [
         {
             "name": "brick/math",
@@ -1024,6 +1024,39 @@
                 "source": "https://github.com/iqbalatma/laravel-service-repo/tree/1.0.23"
             },
             "time": "2023-03-21T09:34:14+00:00"
+        },
+        {
+            "name": "iqbalatma/sand-trail-driver",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iqbalatma/sand-trail-driver.git",
+                "reference": "c30fe25ccc645b78ab7fbf44b5870c3edbeb3de9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iqbalatma/sand-trail-driver/zipball/c30fe25ccc645b78ab7fbf44b5870c3edbeb3de9",
+                "reference": "c30fe25ccc645b78ab7fbf44b5870c3edbeb3de9",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iqbalatma\\SandTrailDriver\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "iqbalatma",
+                    "email": "iqbalatma@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/iqbalatma/sand-trail-driver/issues",
+                "source": "https://github.com/iqbalatma/sand-trail-driver/tree/1.0.2"
+            },
+            "time": "2023-03-24T07:39:04+00:00"
         },
         {
             "name": "laravel/framework",

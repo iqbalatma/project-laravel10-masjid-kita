@@ -18,7 +18,7 @@ class SubdistrictService extends BaseService implements SubdistrictServiceInterf
         //FIXME - this is default, data, need to wait for link
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
-            "masters" => "Master",
+            "masters" => "#",
             "subdistricts" => route("masters.subdistricts.index")
         ];
     }
@@ -87,6 +87,30 @@ class SubdistrictService extends BaseService implements SubdistrictServiceInterf
             $response = [
                 "success" => false,
                 "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
+            ];
+        }
+        return $response;
+    }
+
+
+    /**
+     * Use to delete data by id
+     *
+     * @param integer $id
+     * @return array
+     */
+    public function deleteDataById(int $id): array
+    {
+        try {
+            $this->checkData($id);
+            $this->getData()->delete();
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
             ];
         }
         return $response;

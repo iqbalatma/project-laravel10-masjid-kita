@@ -5,7 +5,7 @@ let css = ["resources/css/app.css"];
 
 let js = [
     "resources/js/app.js",
-    "resources/js/pages/masters/subdistricts/index.js",
+    "resourecs/js/pages/masters/subdistricts/index.js"
 ];
 export default defineConfig({
     plugins: [

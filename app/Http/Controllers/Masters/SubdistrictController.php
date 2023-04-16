@@ -38,16 +38,41 @@ class SubdistrictController extends Controller
 
         if ($this->isError($response)) return $this->getErrorResponse();
 
-        return redirect()->back()->with(["success" => "Add new data subdistrict successfully"]);
+        return redirect()->back()->with(["success" => "Tambah data kecamatan berhasil"]);
     }
 
 
+    /**
+     * Use to update data subdistrict
+     *
+     * @param SubdistrictService $service
+     * @param UpdateSubdistrictRequest $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
     public function update(SubdistrictService $service, UpdateSubdistrictRequest $request, int $id): RedirectResponse
     {
         $response = $service->updateDataById($id, $request->validated());
 
         if ($this->isError($response)) return $this->getErrorResponse();
 
-        return redirect()->back()->with(["success" => "Update data subdistrict successfully"]);
+        return redirect()->back()->with(["success" => "Perbaharui data kecamatan berhasil"]);
+    }
+
+
+    /**
+     * Use to delete data by id
+     *
+     * @param SubdistrictService $service
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(SubdistrictService $service, int $id): RedirectResponse
+    {
+        $response = $service->deleteDataById($id);
+
+        if ($this->isError($response)) return $this->getErrorResponse();
+
+        return redirect()->back()->with(["success" => "Hapus data kecamatan berhasil"]);
     }
 }

@@ -15,7 +15,6 @@
             @if ($subdistricts->count() == 0)
             <x-empty-data></x-empty-data>
             @else
-
             <table class="table">
                 <thead>
                     <tr>
@@ -38,7 +37,11 @@
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-subdistrict="{{ $subdistrict }}">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                                <i class="fa-solid fa-pen-to-square"></i> Sunting
+                            </button>
+
+                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ $subdistrict->id }}">
+                                <i class="fa-solid fa-trash"></i> Hapus
                             </button>
                         </td>
                     </tr>
@@ -111,6 +114,11 @@
             </div>
         </div>
     </div>
+
+    <form id="form-delete" action="{{ route('masters.subdistricts.destroy', ':id') }}" class="d-none" method="POST">
+        @csrf
+        @method("DELETE")
+    </form>
 
     @push("scripts")
     @vite("resources/js/pages/masters/subdistricts/index.js")
