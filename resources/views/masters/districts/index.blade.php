@@ -87,27 +87,25 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Subdistrict</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kabupaten Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.subdistricts.store') }}">
+                    <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.districts.store') }}">
                         @csrf
-                        {{-- //TODO - select option for parent (district) --}}
-                        <input type="hidden" name="district_id" value="1">
                         <div class="col-md-12">
-                            <label for="add-code" class="form-label">Code</label>
+                            <label for="add-code" class="form-label">Kode Kabupaten</label>
                             <input type="text" class="form-control" id="add-code" name="code">
                         </div>
                         <div class="col-md-12">
-                            <label for="add-name" class="form-label">Name</label>
+                            <label for="add-name" class="form-label">Nama Kabupaten</label>
                             <input type="text" class="form-control" id="add-name" name="name">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="form-add" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" form="form-add" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Masters\Districts\StoreDistrictRequest;
 use App\Http\Requests\Masters\Districts\UpdateDistrictRequest;
 use App\Services\Masters\DistrictService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class DistrictController extends Controller
@@ -21,6 +21,24 @@ class DistrictController extends Controller
     {
         viewShare($srevice->getAllData());
         return response()->view("masters.districts.index");
+    }
+
+
+
+    /**
+     * Use to add new data
+     *
+     * @param DistrictService $service
+     * @param StoreDistrictRequest $request
+     * @return RedirectResponse
+     */
+    public function store(DistrictService $service, StoreDistrictRequest $request): RedirectResponse
+    {
+        $response = $service->addNewData($request->validated());
+
+        if ($this->isError($response)) return $this->getErrorResponse();
+
+        return redirect()->back()->with(["success" => "Tambah data kabupaten berhasil"]);
     }
 
     /**
