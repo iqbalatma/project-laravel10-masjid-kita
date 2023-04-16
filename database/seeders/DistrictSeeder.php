@@ -37,7 +37,7 @@ class DistrictSeeder extends Seeder
         ];
 
         foreach ($district as $key => $subdistrict) {
-            District::truncate();
+            District::create($subdistrict);
         }
     }
 }

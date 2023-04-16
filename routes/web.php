@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Masters\DistrictController;
 use App\Http\Controllers\Masters\VillageController;
 use App\Http\Controllers\Masters\SubdistrictController;
 
@@ -25,6 +26,10 @@ Route::prefix("masters")->name("masters.")->group(function () {
         Route::post("/", "store")->name("store");
         Route::patch("/{id}", "update")->name("update");
         Route::delete("/{id}", "destroy")->name("destroy");
+    });
+
+    Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
+        Route::get("/", "index")->name("index");
     });
     Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
         Route::get("/", "index")->name("index");
