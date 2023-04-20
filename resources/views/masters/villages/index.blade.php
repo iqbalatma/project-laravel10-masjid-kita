@@ -8,7 +8,7 @@
             <div class="button-group">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
                     <i class="fa-solid fa-plus"></i>
-                    Add New Villages
+                    Tambah Desa/Kelurahan Baru
                 </button>
             </div>
             @endcan
@@ -18,8 +18,6 @@
             @if ($villages->count() == 0)
             <x-empty-data></x-empty-data>
             @else
-
-            <!-- table  -->
             <table class="table">
                 <thead>
                     <tr>
@@ -28,28 +26,33 @@
                         <th>Kode Post</th>
                         <th>Kecamatan</th>
                         <th>Terakhir Diperbaharui</th>
+                        @canany([$villagePermissions::UPDATE, $villagePermissions::DESTROY])
                         <th>Action</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($villages as $key => $row )
+                    @foreach ($villages as $key => $village )
                     <tr>
                         <td class="text-bold-500">{{ $villages->firstItem() + $key}}</td>
-                        <td class="text-bold-500">{{ $row->name }}</td>
-                        <td class="text-bold-500">{{ $row->postcode }}</td>
-                        <td class="text-bold-500">{{ ucwords($row->subdistrict?->name)??"-" }}</td>
-                        <td class="text-bold-500">{{ $row->updated_at }}</td>
+                        <td class="text-bold-500">{{ $village->name }}</td>
+                        <td class="text-bold-500">{{ $village->postcode }}</td>
+                        <td class="text-bold-500">{{ ucwords($village->subdistrict?->name)??"-" }}</td>
+                        <td class="text-bold-500">{{ $village->updated_at }}</td>
+                        @canany([$villagePermissions::UPDATE, $villagePermissions::DESTROY])
                         <td align="left">
                             @can($villagePermissions::UPDATE)
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit">
                                 <i class="fa-solid fa-pen-to-square"></i> Edit
                             </button>
                             @endcan
-
-                            <button type="button" class="btn btn-danger btn-delete" data-bs-toggle="modal" data-bs-target="#modal-delete" style="margin-left: 10px">
+                            @can($villagePermissions::DESTROY)
+                            <button type="button" class="btn btn-danger btn-delete" style="margin-left: 10px" data-id="{{ $village->id }}">
                                 <i class="fa-solid fa-trash-can"></i> Delete
                             </button>
+                            @endcan
                         </td>
+                        @endcanany
                     </tr>
                     @endforeach
                 </tbody>
@@ -98,4 +101,14 @@
     </div>
     @endcan
 
+    @can($villagePermissions::DESTROY)
+    <form id="form-delete" action="{{ route('masters.villages.destroy', ':id') }}" class="d-none" method="POST">
+        @csrf
+        @method("DELETE")
+    </form>
+    @endcan
+
+    @push("scripts")
+    @vite("resources/js/pages/masters/villages/index.js")
+    @endpush
 </x-dashboard.layout>

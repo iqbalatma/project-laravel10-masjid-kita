@@ -83,6 +83,7 @@ Route::middleware("auth")->group(function () {
         Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
             Route::get("/", "index")->name("index")->middleware("permission:" . VillagePermission::INDEX);
             Route::post("/", "store")->name("store")->middleware("permission:" . VillagePermission::STORE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . VillagePermission::DESTROY);
         });
     });
 });
