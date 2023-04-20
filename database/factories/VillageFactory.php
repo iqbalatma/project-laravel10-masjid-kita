@@ -23,6 +23,7 @@ class VillageFactory extends Factory
         return [
             'name' => $this->faker->city,
             'postcode' => $this->faker->postcode,
+            "subdistrict_id" => 1
         ];
     }
 }

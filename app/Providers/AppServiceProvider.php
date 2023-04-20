@@ -7,6 +7,7 @@ use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
 use App\Statics\Permissions\UserManagementPermission;
+use App\Statics\Permissions\VillagePermission;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
             "userManagementPermissions" => UserManagementPermission::class,
             "districtPermissions" => DistrictPermission::class,
             "subdistrictPermissions" => SubdistrictPermission::class,
+            "villagePermissions" => VillagePermission::class,
         ]);
     }
 }

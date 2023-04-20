@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Village;
 use App\Http\Requests\Masters\Villages\StoreVillageRequest;
+use App\Http\Requests\Masters\Villages\UpdateVillageRequest;
 use App\Services\Masters\VillageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -37,30 +38,23 @@ class VillageController extends Controller
 
         if ($this->isError($response)) return $this->getErrorResponse()->withInput();
 
-        return redirect()->back()->with(["success" => "Add new data village successfully"]);
+        return redirect()->back()->with(["success" => "Tambah data desa berhasil"]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Village  $village
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Village $village)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
+     * Use to update data by id
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Village  $village
-     * @return \Illuminate\Http\Response
+     * @param VillageService $service
+     * @param UpdateVillageRequest $request
+     * @param integer $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, Village $village)
+    public function update(VillageService $service, UpdateVillageRequest $request, int $id): RedirectResponse
     {
-        //
+        $response = $service->updateDataById($id, $request->validated());
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Memperbaharui data desa berhasil"]);
     }
 
     /**
@@ -69,8 +63,10 @@ class VillageController extends Controller
      * @param  \App\Models\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Village $village)
+    public function destroy(VillageService $service, int $id): RedirectResponse
     {
-        //
+        $response = $service->deleteDataById($id);
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Hapus data desa berhasil"]);
     }
 }

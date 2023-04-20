@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\VillageServiceInterface;
+use App\Repositories\SubdistrictRepository;
 use App\Repositories\VillageRepository;
 use App\Services\BaseService;
 use Exception;
@@ -10,10 +11,12 @@ use Exception;
 class VillageService extends BaseService implements VillageServiceInterface
 {
     protected $repository;
+    protected $subdistrictRepo;
     protected array $breadcumbs;
     public function __construct()
     {
         $this->repository = new VillageRepository();
+        $this->subdistrictRepo = new SubdistrictRepository();
 
         //FIXME - this is default, data, need to wait for link
         $this->breadcumbs = [
@@ -35,7 +38,8 @@ class VillageService extends BaseService implements VillageServiceInterface
             "title" => "Villages",
             "description" => "Data of village",
             "breadcumbs" => $this->getBreadcumbs(),
-            "villages" => $this->repository->getAllDataPaginated()
+            "villages" => $this->repository->getAllDataPaginated(),
+            "subdistricts" => $this->subdistrictRepo->getAllData()
         ];
     }
 
@@ -71,24 +75,52 @@ class VillageService extends BaseService implements VillageServiceInterface
      * @param array $requestedData
      * @return array
      */
-    // public function updateDataById(int $id, array $requestedData): array
-    // {
-    //     try {
-    //         $this->checkData($id);
+    public function updateDataById(int $id, array $requestedData): array
+    {
+        try {
+            $this->checkData($id);
 
-    //         $subdistrict = $this->getData();
-    //         $subdistrict->fill($requestedData);
-    //         $subdistrict->save();
+            $subdistrict = $this->getData();
+            $subdistrict->fill($requestedData);
+            $subdistrict->save();
 
-    //         $response = [
-    //             "success" => true,
-    //         ];
-    //     } catch (Exception $e) {
-    //         $response = [
-    //             "success" => false,
-    //             "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
-    //         ];
-    //     }
-    //     return $response;
-    // }
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
+            ];
+        }
+        return $response;
+    }
+
+
+    /**
+     * use to delete data by id
+     *
+     * @param integer $id
+     * @return array
+     */
+    public function deleteDataById(int $id): array
+    {
+        try {
+            $this->checkData($id);
+
+            $village = $this->getData();
+            $village->delete();
+
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
+            ];
+        }
+
+        return $response;
+    }
 }

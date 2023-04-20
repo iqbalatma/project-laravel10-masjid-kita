@@ -60,7 +60,7 @@
                 </li>
 
 
-                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX])
+                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX])
                 <li class="sidebar-title">Data Masters</li>
                 @can($districtPermissions::INDEX)
                 <li class="sidebar-item">
@@ -75,6 +75,14 @@
                     <a href="{{ route('masters.subdistricts.index') }}" class='sidebar-link'>
                         <i class="fa-solid fa-list"></i>
                         <span>Kecamatan</span>
+                    </a>
+                </li>
+                @endcan
+                @can($villagePermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('masters.villages.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-list"></i>
+                        <span>Desa/Kelurahan</span>
                     </a>
                 </li>
                 @endcan
