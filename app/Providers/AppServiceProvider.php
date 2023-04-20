@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\UserManagementPermission;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
             "permissionPermissions" => PermissionPermission::class,
             "rolePermissions" => RolePermission::class,
             "userManagementPermissions" => UserManagementPermission::class,
+            "districtPermissions" => DistrictPermission::class,
         ]);
     }
 }

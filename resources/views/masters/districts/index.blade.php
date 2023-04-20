@@ -3,6 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">Semua Data Kabupaten</h4>
 
+            @can($districtPermissions::STORE)
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -10,6 +11,8 @@
                     Tambahkan Kabupaten Baru
                 </button>
             </div>
+            @endcan
+
         </div>
         <div class="card-body table-responsive">
             @if ($districts->count() == 0)
@@ -22,7 +25,9 @@
                         <th scope="col">Kode</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Waktu Ditambahkan</th>
+                        @canany([$districtPermissions::UPDATE,$districtPermissions::DESTROY])
                         <th scope="col">Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -32,16 +37,22 @@
                         <td>{{ $district->code }}</td>
                         <td>{{ ucwords($district->name) }}</td>
                         <td>{{ $district->created_at }}</td>
+                        @canany([$districtPermissions::UPDATE,$districtPermissions::DESTROY])
                         <td>
-                            <!-- Button trigger modal -->
+                            @can($districtPermissions::UPDATE)
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{{ $district }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
+                            @endcan
 
+                            @can($districtPermissions::DESTROY)
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $district->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
+                            @endcan
                         </td>
+                        @endcanany
+
                     </tr>
                     @endforeach
                 </tbody>

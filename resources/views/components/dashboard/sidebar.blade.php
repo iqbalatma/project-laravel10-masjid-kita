@@ -60,6 +60,18 @@
                 </li>
 
 
+                @canany([$districtPermissions::INDEX])
+                <li class="sidebar-title">Data Masters</li>
+                @can($districtPermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('masters.districts.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-list"></i>
+                        <span>Kabupaten</span>
+                    </a>
+                </li>
+                @endcan
+                @endcanany
+
                 @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
                 <li class="sidebar-title">User Managements</li>
                 @can($userManagementPermissions::INDEX)

@@ -1,19 +1,20 @@
 <x-dashboard.layout>
     <div class="card mb-4">
-        <div class="card-header">
-            <i class="fa-solid fa-user-tag"></i>
-            {{ $cardTitle }}
-        </div>
-        <div class="card-body">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="card-title">{{ $cardTitle }}</h4>
+
             {{-- @can($rolePermissions::CREATE) --}}
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="{{ route('user.managements.roles.create') }}" type="button" class="btn btn-primary">
-                    <i class="fa-solid fa-square-plus"></i>
-                    Add New Roles</a>
+            <div class="button-group">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{{ route('user.managements.roles.create') }}" type="button" class="btn btn-primary">
+                        <i class="fa-solid fa-square-plus"></i>
+                        Tambahkan Peran Baru
+                    </a>
+                </div>
             </div>
             {{-- @endcan --}}
-
-
+        </div>
+        <div class="card-body">
             @if ($roles->count()==0)
             <x-empty-data></x-empty-data>
             @else
