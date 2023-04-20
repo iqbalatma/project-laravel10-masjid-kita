@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Masters;
+namespace App\Repositories;
 
 use App\Models\Permission;
 use Iqbalatma\LaravelServiceRepo\BaseRepository;

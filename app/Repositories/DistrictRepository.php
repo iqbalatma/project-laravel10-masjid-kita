@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Masters;
+namespace App\Repositories;
 
 use App\Models\District;
 use Iqbalatma\LaravelServiceRepo\BaseRepository;

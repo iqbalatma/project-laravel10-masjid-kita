@@ -3,7 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\VillageServiceInterface;
-use App\Repositories\Masters\VillageRepository;
+use App\Repositories\VillageRepository;
 use App\Services\BaseService;
 use Exception;
 

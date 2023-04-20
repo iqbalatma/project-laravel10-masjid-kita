@@ -2,7 +2,7 @@
 
 namespace App\Services\Masters;
 
-use App\Repositories\Masters\PermissionRepository;
+use App\Repositories\PermissionRepository;
 use Exception;
 use Iqbalatma\LaravelServiceRepo\BaseService;
 

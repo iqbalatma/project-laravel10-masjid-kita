@@ -3,8 +3,8 @@
 namespace App\Services\Masters;
 
 use App\Models\Role;
-use App\Repositories\Masters\PermissionRepository;
-use App\Repositories\Masters\RoleRepository;
+use App\Repositories\PermissionRepository;
+use App\Repositories\RoleRepository;
 use Exception;
 use Iqbalatma\LaravelServiceRepo\BaseService;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
