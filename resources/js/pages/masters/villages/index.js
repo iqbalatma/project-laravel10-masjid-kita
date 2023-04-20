@@ -5,15 +5,15 @@ $(function(){
     let defaultEditUrl = $("#form-edit").attr("action");
     let defaultDeleteUrl = $("#form-delete").attr("action");
 
-    // $(".btn-edit").on("click", function(){
-    //     const subdistrict = $(this).data("subdistrict");
+    $(".btn-edit").on("click", function(){
+        const village = $(this).data("village");
 
-    //     $("#edit-code").val(subdistrict.code);
-    //     $("#edit-name").val(subdistrict.name);
-    //     $("#edit-district").val(subdistrict.district_id);
+        $("#edit-name").val(village.name);
+        $("#edit-postcode").val(village.postcode);
+        $("#edit-subdistrict").val(village.subdistrict_id);
 
-    //     changeFormUrlWithId(subdistrict.id, defaultEditUrl, "#form-edit");
-    // })
+        changeFormUrlWithId(village.id, defaultEditUrl, "#form-edit");
+    })
 
     $(".btn-delete").on("click", function(){
         changeFormUrlWithId($(this).data("id"), defaultDeleteUrl, "#form-delete");

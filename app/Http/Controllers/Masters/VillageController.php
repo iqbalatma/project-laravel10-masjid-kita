@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Village;
 use App\Http\Requests\Masters\Villages\StoreVillageRequest;
+use App\Http\Requests\Masters\Villages\UpdateVillageRequest;
 use App\Services\Masters\VillageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -40,6 +41,21 @@ class VillageController extends Controller
         return redirect()->back()->with(["success" => "Tambah data desa berhasil"]);
     }
 
+
+    /**
+     * Use to update data by id
+     *
+     * @param VillageService $service
+     * @param UpdateVillageRequest $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function update(VillageService $service, UpdateVillageRequest $request, int $id): RedirectResponse
+    {
+        $response = $service->updateDataById($id, $request->validated());
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Memperbaharui data desa berhasil"]);
+    }
 
     /**
      * Remove the specified resource from storage.

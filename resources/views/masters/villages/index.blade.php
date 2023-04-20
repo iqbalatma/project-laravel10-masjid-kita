@@ -42,8 +42,8 @@
                         @canany([$villagePermissions::UPDATE, $villagePermissions::DESTROY])
                         <td align="left">
                             @can($villagePermissions::UPDATE)
-                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-village="{{ $village }}">
+                                <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
                             @can($villagePermissions::DESTROY)
@@ -74,8 +74,8 @@
                     <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.villages.store') }}">
                         @csrf
                         <div class="col-md-12">
-                            <label for="edit-district" class="form-label">Kecamatan</label>
-                            <select id="edit-district" class="form-select" name="subdistrict_id">
+                            <label for="add-district" class="form-label">Kecamatan</label>
+                            <select id="add-district" class="form-select" name="subdistrict_id">
                                 <option selected>Pilih Kecamatan</option>
                                 @foreach($subdistricts as $key => $subdistrict)
                                 <option value="{{ $subdistrict->id }}">{{ ucwords($subdistrict->name) }}</option>
@@ -95,6 +95,46 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" form="form-add" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endcan
+
+    @can($villagePermissions::UPDATE)
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambahkan Desa/Kelurahan Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.villages.update', ':id') }}">
+                        @csrf
+                        @method("PUT")
+                        <div class="col-md-12">
+                            <label for="edit-subdistrict" class="form-label">Kecamatan</label>
+                            <select id="edit-subdistrict" class="form-select" name="subdistrict_id">
+                                <option selected>Pilih Kecamatan</option>
+                                @foreach($subdistricts as $key => $subdistrict)
+                                <option value="{{ $subdistrict->id }}">{{ ucwords($subdistrict->name) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="edit-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="edit-name" name="name">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="edit-code" class="form-label">Post Code</label>
+                            <input type="text" class="form-control" id="edit-postcode" name="postcode">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="form-edit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>

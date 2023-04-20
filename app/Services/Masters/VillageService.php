@@ -75,26 +75,26 @@ class VillageService extends BaseService implements VillageServiceInterface
      * @param array $requestedData
      * @return array
      */
-    // public function updateDataById(int $id, array $requestedData): array
-    // {
-    //     try {
-    //         $this->checkData($id);
+    public function updateDataById(int $id, array $requestedData): array
+    {
+        try {
+            $this->checkData($id);
 
-    //         $subdistrict = $this->getData();
-    //         $subdistrict->fill($requestedData);
-    //         $subdistrict->save();
+            $subdistrict = $this->getData();
+            $subdistrict->fill($requestedData);
+            $subdistrict->save();
 
-    //         $response = [
-    //             "success" => true,
-    //         ];
-    //     } catch (Exception $e) {
-    //         $response = [
-    //             "success" => false,
-    //             "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
-    //         ];
-    //     }
-    //     return $response;
-    // }
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ? 'Something went wrong' : $e->getMessage()
+            ];
+        }
+        return $response;
+    }
 
 
     /**
