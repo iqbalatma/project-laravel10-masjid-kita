@@ -95,4 +95,32 @@ class VillageService extends BaseService implements VillageServiceInterface
     //     }
     //     return $response;
     // }
+
+
+    /**
+     * use to delete data by id
+     *
+     * @param integer $id
+     * @return array
+     */
+    public function deleteDataById(int $id): array
+    {
+        try {
+            $this->checkData($id);
+
+            $village = $this->getData();
+            $village->delete();
+
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
+            ];
+        }
+
+        return $response;
+    }
 }

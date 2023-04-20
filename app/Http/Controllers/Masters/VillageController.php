@@ -37,31 +37,9 @@ class VillageController extends Controller
 
         if ($this->isError($response)) return $this->getErrorResponse()->withInput();
 
-        return redirect()->back()->with(["success" => "Add new data village successfully"]);
+        return redirect()->back()->with(["success" => "Tambah data desa berhasil"]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Village  $village
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Village $village)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Village  $village
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Village $village)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -69,8 +47,10 @@ class VillageController extends Controller
      * @param  \App\Models\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Village $village)
+    public function destroy(VillageService $service, int $id): RedirectResponse
     {
-        //
+        $response = $service->deleteDataById($id);
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Hapus data desa berhasil"]);
     }
 }
