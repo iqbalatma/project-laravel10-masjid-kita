@@ -6,18 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mosque extends Model
+class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        "name",
-        "latitude",
-        "longitude",
-        "area_wide",
-        "village_id",
-        "balance",
-        "claim",
-        "debt",
+        "description", "amount", "type", "method", "mosque_id", "user_id"
     ];
 }
