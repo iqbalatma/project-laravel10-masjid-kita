@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
+use App\Statics\Permissions\SubdistrictPermission;
 use App\Statics\Permissions\UserManagementPermission;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             "rolePermissions" => RolePermission::class,
             "userManagementPermissions" => UserManagementPermission::class,
             "districtPermissions" => DistrictPermission::class,
+            "subdistrictPermissions" => SubdistrictPermission::class,
         ]);
     }
 }
