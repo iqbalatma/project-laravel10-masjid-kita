@@ -7,6 +7,7 @@ use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
+use App\Statics\Permissions\TransactionPermission;
 use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Permissions\VillagePermission;
 use Carbon\Carbon;
@@ -44,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
             "subdistrictPermissions" => SubdistrictPermission::class,
             "villagePermissions" => VillagePermission::class,
             "mosquePermissions" => MosquePermission::class,
+            "transactionPermissions" => TransactionPermission::class,
         ]);
     }
 }

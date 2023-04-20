@@ -2,7 +2,7 @@
 
 namespace App\Statics\Permissions;
 
-class RolePermission
+class TransactionPermission
 {
     public const INDEX = "transactions.index";
     public const CREATE = "transactions.create";

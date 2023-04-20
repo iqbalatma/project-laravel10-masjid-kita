@@ -41,7 +41,7 @@
                     </a>
                 </li>
 
-                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX])
+                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX, $mosquePermissions::INDEX])
                 <li class="sidebar-title">Data Masters</li>
                 @can($districtPermissions::INDEX)
                 <li class="sidebar-item">
@@ -76,6 +76,22 @@
                 </li>
                 @endcan
                 @endcanany
+
+
+                @canany([$transactionPermissions::INDEX])
+                <li class="sidebar-title">Data Transaksi</li>
+
+                @can($transactionPermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('transactions.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-right-left"></i>
+                        <span>Transaksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @endcanany
+
 
                 @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
                 <li class="sidebar-title">User Managements</li>

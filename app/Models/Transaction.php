@@ -13,4 +13,14 @@ class Transaction extends Model
     protected $fillable = [
         "description", "amount", "type", "method", "mosque_id", "user_id"
     ];
+
+    public function mosque()
+    {
+        return $this->belongsTo(Mosque::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
