@@ -7,7 +7,11 @@ use App\Http\Controllers\Masters\PermissionController;
 use App\Http\Controllers\Masters\RoleController;
 use App\Http\Controllers\Masters\VillageController;
 use App\Http\Controllers\Masters\SubdistrictController;
+use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
+use App\Statics\Permissions\RolePermission;
+use App\Statics\Permissions\SubdistrictPermission;
+use App\Statics\Permissions\VillagePermission;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,38 +37,40 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 Route::middleware("auth")->group(function () {
     Route::prefix("masters")->name("masters.")->group(function () {
         // PERMISSIONS
-        Route::get("/permissions", PermissionController::class)->name("permissions.index");
+        Route::get("/permissions", PermissionController::class)->name("permissions.index")->middleware("permission:" . PermissionPermission::INDEX);
 
         // ROLES
         Route::prefix("roles")->name("roles.")->controller(RoleController::class)->group(function () {
-            Route::get("/", "index")->name("index");
-            Route::get("/create", "create")->name("create");
-            Route::get("/edit/{id}", "edit")->name("edit");
-            Route::post("/", "store")->name("store");
-            Route::delete("/{id}", "destroy")->name("destroy");
-            Route::put("/{id}", "update")->name("update");
-        });
-
-        // SUBDISTRICT
-        Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
-            Route::get("/", "index")->name("index");
-            Route::post("/", "store")->name("store");
-            Route::put("/{id}", "update")->name("update");
-            Route::delete("/{id}", "destroy")->name("destroy");
+            Route::get("/", "index")->name("index")->middleware("permission:" . RolePermission::INDEX);
+            Route::get("/create", "create")->name("create")->middleware("permission:" . RolePermission::CREATE);
+            Route::get("/edit/{id}", "edit")->name("edit")->middleware("permission:" . RolePermission::EDIT);;
+            Route::post("/", "store")->name("store")->middleware("permission:" . RolePermission::STORE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . RolePermission::DESTROY);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . RolePermission::UPDATE);
         });
 
         // DISTRICTS
         Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
-            Route::get("/", "index")->name("index");
-            Route::post("/", "store")->name("store");
-            Route::put("/{id}", "update")->name("update");
-            Route::delete("/{id}", "destroy")->name("destroy");
+            Route::get("/", "index")->name("index")->middleware("permission:" . DistrictPermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . DistrictPermission::STORE);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . DistrictPermission::UPDATE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . DistrictPermission::DESTROY);
         });
+
+
+        // SUBDISTRICT
+        Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . SubdistrictPermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . SubdistrictPermission::STORE);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . SubdistrictPermission::UPDATE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . SubdistrictPermission::DESTROY);
+        });
+
 
         // VILLAGES
         Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
-            Route::get("/", "index")->name("index");
-            Route::post("/", "store")->name("store");
+            Route::get("/", "index")->name("index")->middleware("permission:" . VillagePermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . VillagePermission::STORE);
         });
     });
 });
