@@ -6,14 +6,14 @@
         </div>
         <div class="card-body">
 
-            <form class="row g-3" method="POST" action="{{ route('masters.roles.store') }}">
+            <form class="row g-3" method="POST" action="{{ route('user.managements.roles.store') }}">
                 @csrf
                 <div class="col-md-12">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter name of new role" required>
                 </div>
                 <div class="col-12">
-                    <a href="{{ route('masters.roles.index') }}" class="btn btn-danger"><i class="fa-solid fa-square-xmark"></i> Cancel</a>
+                    <a href="{{ route('user.managements.roles.index') }}" class="btn btn-danger"><i class="fa-solid fa-square-xmark"></i> Cancel</a>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
                 </div>
             </form>

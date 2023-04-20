@@ -7,7 +7,7 @@
         <div class="card-body">
             {{-- @can($rolePermissions::CREATE) --}}
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a href="{{ route('masters.roles.create') }}" type="button" class="btn btn-primary">
+                <a href="{{ route('user.managements.roles.create') }}" type="button" class="btn btn-primary">
                     <i class="fa-solid fa-square-plus"></i>
                     Add New Roles</a>
             </div>
@@ -39,7 +39,7 @@
                             {{-- @canany([$rolePermissions::EDIT, $rolePermissions::DESTROY]) --}}
                             <td>
                                 {{-- @can($rolePermissions::EDIT) --}}
-                                <a class="btn btn-success" href="{{ route('masters.roles.edit', $role->id) }}">
+                                <a class="btn btn-success" href="{{ route('user.managements.roles.edit', $role->id) }}">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 {{-- @endcan --}}
@@ -62,7 +62,7 @@
     </div>
 
 
-    <form id="form-delete" action="{{ route('masters.roles.destroy', ':id') }}" class="d-none" method="POST">
+    <form id="form-delete" action="{{ route('user.managements.roles.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
