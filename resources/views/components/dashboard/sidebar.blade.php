@@ -70,7 +70,7 @@
                 @can($mosquePermissions::INDEX)
                 <li class="sidebar-item">
                     <a href="{{ route('masters.mosques.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
+                        <i class="fa-solid fa-mosque"></i>
                         <span>Masjid</span>
                     </a>
                 </li>
