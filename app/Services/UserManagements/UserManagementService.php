@@ -138,9 +138,15 @@ class UsermanagementService extends BaseService implements UserManagementService
     {
         try {
             $this->checkData($id);
+            $user = $this->getData();
+            if ($user->status == "active") {
+                $user->status = "inactive";
+            } else {
+                $user->status = "active";
+            }
+            $user->save();
             $response = [
                 "success" => true,
-                // "data" => $this->repository->changeStatusById($id)
             ];
         } catch (Exception $e) {
             $response = [

@@ -7,7 +7,6 @@ use App\Http\Requests\UserManagements\UserStoreRequest;
 use App\Http\Requests\UserManagements\UserUpdateRequest;
 use App\Services\UserManagements\UsermanagementService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class UserManagementController extends Controller
@@ -53,7 +52,7 @@ class UserManagementController extends Controller
         $response = $service->updateDataById($id, $request->validated());
         if ($this->isError($response)) return $this->getErrorResponse();
 
-        return redirect()->route("user.managements.users.index")->with("success", "Update data user successfully");
+        return redirect()->route("user.managements.users.index")->with("success", "Memperbaharui data user berhasil");
     }
 
     /**
@@ -66,12 +65,8 @@ class UserManagementController extends Controller
     {
         $response = $service->changeStatusById($id);
 
-        if ($this->isError($response)) {
-            return $this->getErrorResponse();
-        }
+        if ($this->isError($response)) return $this->getErrorResponse();
 
-        return redirect()
-            ->route("users.index")
-            ->with("success", "Change status active user successfully");
+        return redirect()->route("user.managements.users.index")->with("success", "Mengubah status aktif user berhasil");
     }
 }
