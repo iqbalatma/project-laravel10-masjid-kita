@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\VillageServiceInterface;
+use App\Repositories\SubdistrictRepository;
 use App\Repositories\VillageRepository;
 use App\Services\BaseService;
 use Exception;
@@ -10,10 +11,12 @@ use Exception;
 class VillageService extends BaseService implements VillageServiceInterface
 {
     protected $repository;
+    protected $subdistrictRepo;
     protected array $breadcumbs;
     public function __construct()
     {
         $this->repository = new VillageRepository();
+        $this->subdistrictRepo = new SubdistrictRepository();
 
         //FIXME - this is default, data, need to wait for link
         $this->breadcumbs = [
@@ -35,7 +38,8 @@ class VillageService extends BaseService implements VillageServiceInterface
             "title" => "Villages",
             "description" => "Data of village",
             "breadcumbs" => $this->getBreadcumbs(),
-            "villages" => $this->repository->getAllDataPaginated()
+            "villages" => $this->repository->getAllDataPaginated(),
+            "subdistricts" => $this->subdistrictRepo->getAllData()
         ];
     }
 

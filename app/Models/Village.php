@@ -12,6 +12,12 @@ class Village extends Model
 
     protected $fillable = [
         "name",
-        "postcode"
+        "postcode",
+        "subdistrict_id"
     ];
+
+    public function subdistrict()
+    {
+        return $this->belongsTo(Subdistrict::class);
+    }
 }

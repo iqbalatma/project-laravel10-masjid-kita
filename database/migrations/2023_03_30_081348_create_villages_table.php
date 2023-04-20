@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('postcode');
+            $table->unsignedBigInteger("subdistrict_id");
             $table->timestamps();
             $table->softDeletes();
         });
