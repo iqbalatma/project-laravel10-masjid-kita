@@ -97,24 +97,38 @@
         </div>
     </div>
 
-    <!-- Modal Add New Subdistrict-->
+    @can($mosquePermissions::STORE)
+    <!-- Modal Add New Mosque-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Kabupaten Baru</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Masjid Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.districts.store') }}">
+                    <form id="form-add" class="row g-3" method="POST" action="{{ route('masters.mosques.store') }}">
                         @csrf
                         <div class="col-md-12">
-                            <label for="add-code" class="form-label">Kode Kabupaten</label>
-                            <input type="text" class="form-control" id="add-code" name="code">
+                            <label for="add-name" class="form-label">Nama Masjid</label>
+                            <input type="text" class="form-control" id="add-name" name="name">
                         </div>
                         <div class="col-md-12">
-                            <label for="add-name" class="form-label">Nama Kabupaten</label>
-                            <input type="text" class="form-control" id="add-name" name="name">
+                            <label for="add-latitude" class="form-label">Latitude</label>
+                            <input type="text" class="form-control" id="add-latitude" name="latitude">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="add-longitude" class="form-label">Longitude</label>
+                            <input type="text" class="form-control" id="add-longitude" name="longitude">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="add-village" class="form-label">Desa/Kelurahan</label>
+                            <select id="add-village" class="form-select" name="village_id">
+                                <option selected>Pilih Desa/Kelurahan</option>
+                                @foreach($villages as $key => $village)
+                                <option value="{{ $village->id }}">{{ ucwords($village->name) }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -125,6 +139,7 @@
             </div>
         </div>
     </div>
+    @endcan
 
     <form id="form-delete" action="{{ route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
