@@ -7,10 +7,12 @@ use App\Http\Controllers\UserManagements\PermissionController;
 use App\Http\Controllers\UserManagements\RoleController;
 use App\Http\Controllers\Masters\VillageController;
 use App\Http\Controllers\Masters\SubdistrictController;
+use App\Http\Controllers\UserManagements\UserManagementController;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
+use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Permissions\VillagePermission;
 
 /*
@@ -36,6 +38,14 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 
 Route::middleware("auth")->group(function () {
     Route::prefix("user-managements")->name("user.managements.")->group(function () {
+        // USER MANAGEMENT
+        Route::prefix("/users")->name("users.")->controller(UserManagementController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . UserManagementPermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . UserManagementPermission::STORE);
+            Route::patch("/{id}", "update")->name("update")->middleware("permission:" . UserManagementPermission::UPDATE);
+            Route::put("/{id}", "changeStatusActive")->name("change.status.active")->middleware("permission:" . UserManagementPermission::CHANGE_STATUS_ACTIVE);
+        });
+
         // PERMISSIONS
         Route::get("/permissions", PermissionController::class)->name("permissions.index")->middleware("permission:" . PermissionPermission::INDEX);
 

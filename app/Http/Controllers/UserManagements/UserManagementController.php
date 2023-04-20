@@ -21,20 +21,7 @@ class UserManagementController extends Controller
     public function index(UsermanagementService $service): Response
     {
         viewShare($service->getAllData());
-        return response()->view("users.index");
-    }
-
-
-    /**
-     * Description : use to show add new user form
-     *
-     * @param UserManagementService $service dependency injection
-     * @return Response
-     */
-    public function create(UserManagementService $service): Response
-    {
-        viewShare($service->getCreateData());
-        return response()->view("users.create");
+        return response()->view("user-managements.users.index");
     }
 
 
@@ -48,27 +35,8 @@ class UserManagementController extends Controller
     public function store(UserManagementService $service, UserStoreRequest $request): RedirectResponse
     {
         $response = $service->addNewData($request->validated());
-
         if ($this->isError($response)) return $this->getErrorResponse();
-
-        return redirect()->route("users.index")->with("success", "Add new data user successfully");
-    }
-
-
-    /**
-     * Description : use to show form for edit the data by id
-     *
-     * @param UserManagementService $service dependency injection
-     * @param int $id of user
-     * @return RedirectResponse|Response
-     */
-    public function edit(UserManagementService $service, int $id): RedirectResponse|Response
-    {
-        $response = $service->getEditData($id);
-        if ($this->isError($response)) return $this->getErrorResponse();
-
-        viewShare($service->getEditData($id));
-        return response()->view("users.edit");
+        return redirect()->route("user.managements.users.index")->with("success", "Tambah data user berhasil");
     }
 
 
@@ -85,7 +53,7 @@ class UserManagementController extends Controller
         $response = $service->updateDataById($id, $request->validated());
         if ($this->isError($response)) return $this->getErrorResponse();
 
-        return redirect()->route("users.index")->with("success", "Update data user successfully");
+        return redirect()->route("user.managements.users.index")->with("success", "Update data user successfully");
     }
 
     /**

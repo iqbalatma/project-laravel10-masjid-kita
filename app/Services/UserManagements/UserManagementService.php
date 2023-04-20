@@ -32,22 +32,7 @@ class UsermanagementService extends BaseService implements UserManagementService
             "title"       => "User Management",
             "description" => "Data user of this application",
             "cardTitle"   => "User Management",
-            "users"       => $this->repository->getAllDataPaginated()
-        ];
-    }
-
-
-    /**
-     * Description : use to get data for create new user form
-     *
-     * @return array
-     */
-    public function getCreateData(): array
-    {
-        return [
-            "title"       => "User Management",
-            "description" => "Form for add new data user",
-            "cardTitle"   => "Add New User",
+            "users"       => $this->repository->getAllDataPaginated(),
             "roles" => $this->roleRepo->getAllData()
         ];
     }
@@ -120,7 +105,13 @@ class UsermanagementService extends BaseService implements UserManagementService
     {
         try {
             $requestedRoles = $requestedData["roles"];
+            if (!$requestedData["password"]) {
+                unset($requestedData["password"]);
+            } else {
+                $requestedData["password"] = Hash::make($requestedData["password"]);
+            }
             unset($requestedData["roles"]);
+
             $this->checkData($id);
             $user = $this->repository->updateDataById($id, $requestedData);
             $user->syncRoles($requestedRoles);

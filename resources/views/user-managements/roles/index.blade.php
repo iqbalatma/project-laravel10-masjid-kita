@@ -68,6 +68,6 @@
     </form>
 
     @push("scripts")
-    @vite("resources/js/pages/masters/roles/index.js")
+    @vite("resources/js/pages/user-managements/roles/index.js")
     @endpush
 </x-dashboard.layout>

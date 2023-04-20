@@ -12,7 +12,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,11 @@ class UserStoreRequest extends FormRequest
     {
         return [
             "name" => "required",
+            "phone" => "",
+            "address" => "",
             "email" =>  [Rule::unique("users", "email")->whereNull("deleted_at"), "email", "required"],
             "password" => "confirmed|required",
+            "roles" => ""
         ];
     }
 }
