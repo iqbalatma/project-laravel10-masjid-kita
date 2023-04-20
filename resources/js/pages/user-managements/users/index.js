@@ -8,10 +8,16 @@ $(function(){
     $(".btn-edit").on("click", function(){
         const user = $(this).data("user");
 
+        console.log(user.roles);
+
         $("#edit-name").val(user.name);
         $("#edit-email").val(user.email);
         $("#edit-phone").val(user.phone);
         $("#edit-address").val(user.address);
+
+        user.roles.forEach(role => {
+            $(`#edit-roles-${role.id}`).attr("checked", true);
+        });
 
         changeFormUrlWithId(user.id, defaultEditUrl, "#form-edit");
     })

@@ -72,11 +72,11 @@
                                         @method("PUT")
                                         @if ($user->status=="active")
                                         <button type="submit" class="btn btn-sm btn-danger btn-change-status">
-                                            Nonaktifkan <i class="fa-solid fa-x"></i>
+                                            <i class="fa-solid fa-x"></i> Nonaktifkan
                                         </button>
                                         @else
                                         <button type="submit" class="btn btn-sm btn-primary btn-change-status">
-                                            Aktifkan <i class="fa-solid fa-square-check"></i>
+                                            <i class="fa-solid fa-square-check"></i> Aktifkan
                                         </button>
                                         @endif
                                     </form>
