@@ -39,36 +39,6 @@ class UsermanagementService extends BaseService implements UserManagementService
 
 
     /**
-     * Description : use to get data for create new user form
-     *
-     * @param int $id of user that want to be edited
-     * @return array
-     */
-    public function getEditData(int $id): array
-    {
-        try {
-            $this->checkData($id);
-            $roles = $this->roleRepo->getAllData();
-            $this->setActiveRoles($roles, $this->getData()->roles);
-            $response =  [
-                "success" => true,
-                "title"       => "User Management",
-                "description" => "Form for edit data user",
-                "cardTitle"   => "Edit User",
-                "roles"       => $roles,
-                "user"        => $this->getData(),
-            ];
-        } catch (Exception $e) {
-            $response = [
-                "success" => false,
-                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
-            ];
-        }
-        return $response;
-    }
-
-
-    /**
      * Description : use to add new data user
      *
      * @param array $requestedDatata
