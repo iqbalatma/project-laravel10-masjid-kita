@@ -37,4 +37,17 @@ class MosqueController extends Controller
         if ($this->isError($response)) return $this->getErrorResponse();
         return redirect()->back()->with(["success" => "Tambah data masjid berhasil"]);
     }
+    /**
+     * Use to delete data by id
+     *
+     * @param MosqueService $service
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(MosqueService $service, int $id): RedirectResponse
+    {
+        $response = $service->deleteDataById($id);
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Hapus data masjid berhasil"]);
+    }
 }

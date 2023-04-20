@@ -48,12 +48,12 @@
                             <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
-
-                            @can($districtPermissions::DESTROY)
-                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ $district->id }}">
+                            --}}
+                            @can($mosquePermissions::DESTROY)
+                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ $mosque->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
-                            @endcan --}}
+                            @endcan
                         </td>
                         @endcanany
 
@@ -141,12 +141,12 @@
     </div>
     @endcan
 
-    <form id="form-delete" action="{{ route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
+    <form id="form-delete" action="{{ route('masters.mosques.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
 
     @push("scripts")
-    @vite("resources/js/pages/masters/districts/index.js")
+    @vite("resources/js/pages/masters/mosques/index.js")
     @endpush
 </x-dashboard.layout>
