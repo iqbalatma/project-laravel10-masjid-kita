@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\UserManagementPermission;
@@ -27,6 +28,10 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::findById(1);
+        $role->givePermissionTo(DistrictPermission::INDEX);
+        $role->givePermissionTo(DistrictPermission::STORE);
+        $role->givePermissionTo(DistrictPermission::UPDATE);
+        $role->givePermissionTo(DistrictPermission::DESTROY);
         $role->givePermissionTo(RolePermission::INDEX);
         $role->givePermissionTo(RolePermission::CREATE);
         $role->givePermissionTo(RolePermission::STORE);
