@@ -43,12 +43,12 @@
                         <td>{{ $mosque->updated_at }}</td>
                         @canany([$mosquePermissions::UPDATE,$mosquePermissions::DESTROY])
                         <td>
-                            {{-- @can($districtPermissions::UPDATE)
-                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{{ $district }}">
-                            <i class="fa-solid fa-pen-to-square"></i> Sunting
+                            @can($districtPermissions::UPDATE)
+                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-mosque="{{ $mosque }}">
+                                <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
-                            --}}
+
                             @can($mosquePermissions::DESTROY)
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $mosque->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
@@ -66,26 +66,39 @@
         </div>
     </div>
 
+    @can($mosquePermissions::UPDATE)
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-editLabel">Sunting Kabupaten</h5>
+                    <h5 class="modal-title" id="modal-editLabel">Sunting Masjid</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.districts.update', ':id') }}">
+                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.mosques.update', ':id') }}">
                         @csrf
                         @method("PUT")
-                        <input type="hidden" name="district_id" value="1">
                         <div class="col-md-12">
-                            <label for="edit-code" class="form-label">Kode</label>
-                            <input type="text" class="form-control" id="edit-code" name="code">
+                            <label for="edit-name" class="form-label">Nama Masjid</label>
+                            <input type="text" class="form-control" id="edit-name" name="name">
                         </div>
                         <div class="col-md-12">
-                            <label for="edit-name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="edit-name" name="name">
+                            <label for="edit-latitude" class="form-label">Latitude</label>
+                            <input type="text" class="form-control" id="edit-latitude" name="latitude">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="edit-longitude" class="form-label">Longitude</label>
+                            <input type="text" class="form-control" id="edit-longitude" name="longitude">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="edit-village" class="form-label">Desa/Kelurahan</label>
+                            <select id="edit-village" class="form-select" name="village_id">
+                                <option selected>Pilih Desa/Kelurahan</option>
+                                @foreach($villages as $key => $village)
+                                <option value="{{ $village->id }}">{{ ucwords($village->name) }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -96,6 +109,8 @@
             </div>
         </div>
     </div>
+    @endcan
+
 
     @can($mosquePermissions::STORE)
     <!-- Modal Add New Mosque-->
@@ -141,10 +156,12 @@
     </div>
     @endcan
 
+    @can($mosquePermissions::DESTROY)
     <form id="form-delete" action="{{ route('masters.mosques.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
+    @endcan
 
     @push("scripts")
     @vite("resources/js/pages/masters/mosques/index.js")

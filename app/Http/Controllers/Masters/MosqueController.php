@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Masters\Mosques\StoreMosqueRequest;
+use App\Http\Requests\Masters\Mosques\UpdateMosqueRequest;
 use App\Services\Masters\MosqueService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,6 +38,22 @@ class MosqueController extends Controller
         if ($this->isError($response)) return $this->getErrorResponse();
         return redirect()->back()->with(["success" => "Tambah data masjid berhasil"]);
     }
+
+    /**
+     * Use to update data mosoque
+     *
+     * @param MosqueService $service
+     * @param UpdateMosqueRequest $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function update(MosqueService $service, UpdateMosqueRequest $request, int $id): RedirectResponse
+    {
+        $response = $service->updateDataById($id, $request->validated());
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Perbaharui data masjid berhasil"]);
+    }
+
     /**
      * Use to delete data by id
      *
