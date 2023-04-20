@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\Auth\AuthServiceInterface;
 use App\Repositories\UserRepository;
 use App\Services\BaseService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService extends BaseService implements AuthServiceInterface
@@ -47,5 +48,19 @@ class AuthService extends BaseService implements AuthServiceInterface
             return true;
         }
         return false;
+    }
+
+    /**
+     * Use to logout user
+     *
+     * @param object $requestedData
+     * @return void
+     */
+    public function logout(Request $requestedData): void
+    {
+        Auth::logout();
+
+        $requestedData->session()->invalidate();
+        $requestedData->session()->regenerateToken();
     }
 }

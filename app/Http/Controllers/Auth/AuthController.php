@@ -40,4 +40,18 @@ class AuthController extends Controller
         viewShare($service->getLoginData());
         return response()->view("auth.login");
     }
+
+
+    /**
+     * Description : use to logout account
+     *
+     * @param AuthService $service dependency injection
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(AuthService $service, Request $request): RedirectResponse
+    {
+        $service->logout($request);
+        return redirect('/');
+    }
 }

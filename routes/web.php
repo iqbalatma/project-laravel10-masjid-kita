@@ -27,42 +27,44 @@ Route::get('/', function () {
 Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(function () {
     Route::get("/", "login")->name("login");
     Route::post("/", "authenticate")->name("authenticate");
+    Route::post("/logout", "logout")->name("logout")->middleware("auth");
 });
 
+Route::middleware("auth")->group(function () {
+    Route::prefix("masters")->name("masters.")->group(function () {
+        // PERMISSIONS
+        Route::get("/permissions", PermissionController::class)->name("permissions.index");
 
-Route::prefix("masters")->name("masters.")->group(function () {
-    // PERMISSIONS
-    Route::get("/permissions", PermissionController::class)->name("permissions.index");
+        // ROLES
+        Route::prefix("roles")->name("roles.")->controller(RoleController::class)->group(function () {
+            Route::get("/", "index")->name("index");
+            Route::get("/create", "create")->name("create");
+            Route::get("/edit/{id}", "edit")->name("edit");
+            Route::post("/", "store")->name("store");
+            Route::delete("/{id}", "destroy")->name("destroy");
+            Route::put("/{id}", "update")->name("update");
+        });
 
-    // ROLES
-    Route::prefix("roles")->name("roles.")->controller(RoleController::class)->group(function () {
-        Route::get("/", "index")->name("index");
-        Route::get("/create", "create")->name("create");
-        Route::get("/edit/{id}", "edit")->name("edit");
-        Route::post("/", "store")->name("store");
-        Route::delete("/{id}", "destroy")->name("destroy");
-        Route::put("/{id}", "update")->name("update");
-    });
+        // SUBDISTRICT
+        Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
+            Route::get("/", "index")->name("index");
+            Route::post("/", "store")->name("store");
+            Route::put("/{id}", "update")->name("update");
+            Route::delete("/{id}", "destroy")->name("destroy");
+        });
 
-    // SUBDISTRICT
-    Route::prefix("subdistricts")->name("subdistricts.")->controller(SubdistrictController::class)->group(function () {
-        Route::get("/", "index")->name("index");
-        Route::post("/", "store")->name("store");
-        Route::put("/{id}", "update")->name("update");
-        Route::delete("/{id}", "destroy")->name("destroy");
-    });
+        // DISTRICTS
+        Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
+            Route::get("/", "index")->name("index");
+            Route::post("/", "store")->name("store");
+            Route::put("/{id}", "update")->name("update");
+            Route::delete("/{id}", "destroy")->name("destroy");
+        });
 
-    // DISTRICTS
-    Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
-        Route::get("/", "index")->name("index");
-        Route::post("/", "store")->name("store");
-        Route::put("/{id}", "update")->name("update");
-        Route::delete("/{id}", "destroy")->name("destroy");
-    });
-
-    // VILLAGES
-    Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
-        Route::get("/", "index")->name("index");
-        Route::post("/", "store")->name("store");
+        // VILLAGES
+        Route::prefix("villages")->name("villages.")->controller(VillageController::class)->group(function () {
+            Route::get("/", "index")->name("index");
+            Route::post("/", "store")->name("store");
+        });
     });
 });
