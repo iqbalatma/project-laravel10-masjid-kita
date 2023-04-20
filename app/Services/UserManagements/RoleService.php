@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services\Masters;
+namespace App\Services\UserManagements;
 
-use App\Models\Role;
+use App\Contracts\Interfaces\UserManagements\RoleServiceInterface;
 use App\Repositories\PermissionRepository;
 use App\Repositories\RoleRepository;
 use Exception;
 use Iqbalatma\LaravelServiceRepo\BaseService;
 use Iqbalatma\LaravelServiceRepo\Exceptions\EmptyDataException;
 
-class RoleService extends BaseService
+class RoleService extends BaseService implements RoleServiceInterface
 {
     protected $repository;
     protected $permissionRepo;

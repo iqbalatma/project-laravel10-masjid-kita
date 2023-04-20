@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Masters\Roles;
+namespace App\Http\Requests\UserManagements\Roles;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRoleRequest extends FormRequest
+class StoreRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            "permissions" => ""
+            "name" => "required|max:125",
         ];
     }
 }

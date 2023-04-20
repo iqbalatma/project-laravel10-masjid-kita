@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Services\Masters;
+namespace App\Services\UserManagements;
 
+use App\Contracts\Interfaces\UserManagements\PermissionServiceInterface;
 use App\Repositories\PermissionRepository;
 use Exception;
 use Iqbalatma\LaravelServiceRepo\BaseService;
 
 
-class PermissionService extends BaseService
+class PermissionService extends BaseService implements PermissionServiceInterface
 {
     protected $repository;
     public function __construct()

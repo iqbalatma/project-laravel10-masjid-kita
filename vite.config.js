@@ -7,7 +7,8 @@ let js = [
     "resources/js/app.js",
     "resources/js/pages/masters/districts/index.js",
     "resources/js/pages/masters/subdistricts/index.js",
-    "resources/js/pages/masters/roles/index.js",
+    "resources/js/pages/user-managements/roles/index.js",
+    "resources/js/pages/user-managements/users/index.js",
 ];
 export default defineConfig({
     plugins: [

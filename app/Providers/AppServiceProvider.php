@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
+use App\Statics\Permissions\UserManagementPermission;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         viewShare([
             "permissionPermissions" => PermissionPermission::class,
             "rolePermissions" => RolePermission::class,
+            "userManagementPermissions" => UserManagementPermission::class,
         ]);
     }
 }
