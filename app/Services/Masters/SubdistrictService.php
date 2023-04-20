@@ -3,7 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\SubdistrictServiceInterface;
-use App\Repositories\Masters\SubdistrictRepository;
+use App\Repositories\SubdistrictRepository;
 use App\Services\BaseService;
 use Exception;
 

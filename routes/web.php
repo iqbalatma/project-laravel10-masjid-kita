@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Masters\DistrictController;
 use App\Http\Controllers\Masters\PermissionController;
@@ -22,6 +23,12 @@ use App\Statics\Permissions\PermissionPermission;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(function () {
+    Route::get("/", "login")->name("login");
+    Route::post("/", "authenticate")->name("authenticate");
+});
+
 
 Route::prefix("masters")->name("masters.")->group(function () {
     // PERMISSIONS
