@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             SubdistrictSeeder::class,
             VillageSeeder::class,
             DistrictSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            MosqueSeeder::class
         ]);
     }
 }

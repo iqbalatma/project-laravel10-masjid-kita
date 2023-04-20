@@ -62,6 +62,7 @@
         </div>
     </div>
 
+    @can($districtPermissions::UPDATE)
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -92,7 +93,9 @@
             </div>
         </div>
     </div>
+    @endcan
 
+    @can($districtPermissions::STORE)
     <!-- Modal Add New Subdistrict-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -121,11 +124,15 @@
             </div>
         </div>
     </div>
+    @endcan
 
+    @can($districtPermissions::DESTROY)
     <form id="form-delete" action="{{ route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
+    @endcan
+
 
     @push("scripts")
     @vite("resources/js/pages/masters/districts/index.js")

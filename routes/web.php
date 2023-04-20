@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Statics\Permissions\MosquePermission;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Masters\DistrictController;
+use App\Http\Controllers\Masters\MosqueController;
 use App\Http\Controllers\UserManagements\PermissionController;
 use App\Http\Controllers\UserManagements\RoleController;
 use App\Http\Controllers\Masters\VillageController;
@@ -61,6 +63,14 @@ Route::middleware("auth")->group(function () {
     });
 
     Route::prefix("masters")->name("masters.")->group(function () {
+        // MOSQUES
+        Route::prefix("mosques")->name("mosques.")->controller(MosqueController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . MosquePermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . MosquePermission::STORE);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . MosquePermission::UPDATE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . MosquePermission::DESTROY);
+        });
+
         // DISTRICTS
         Route::prefix("districts")->name("districts.")->controller(DistrictController::class)->group(function () {
             Route::get("/", "index")->name("index")->middleware("permission:" . DistrictPermission::INDEX);
