@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
         if ($service->authenticate($request->validated())) {
             //FIXME - NEED TO CHANGE REDIRECT USER
-            return redirect()->intended(route("masters.roles.index"));
+            return redirect()->intended(route("user.managements.roles.index"));
         }
 
         return redirect()->back()->with("failed", "Email atau password salah !");

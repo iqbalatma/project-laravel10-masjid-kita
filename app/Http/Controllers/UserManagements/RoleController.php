@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Masters;
+namespace App\Http\Controllers\UserManagements;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Masters\Roles\StoreRoleRequest;
-use App\Http\Requests\Masters\Roles\UpdateRoleRequest;
-use App\Services\Masters\RoleService;
+use App\Http\Requests\UserManagements\Roles\StoreRoleRequest;
+use App\Http\Requests\UserManagements\Roles\UpdateRoleRequest;
+use App\Services\UserManagements\RoleService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -19,7 +19,7 @@ class RoleController extends Controller
     public function index(RoleService $service): Response
     {
         viewShare($service->getAllData());
-        return response()->view("masters.roles.index");
+        return response()->view("user-managements.roles.index");
     }
 
     /**
@@ -31,7 +31,7 @@ class RoleController extends Controller
     public function create(RoleService $service): Response
     {
         viewShare($service->getCreateData());
-        return response()->view("masters.roles.create");
+        return response()->view("user-managements.roles.create");
     }
 
     /**
@@ -45,9 +45,9 @@ class RoleController extends Controller
     {
         $response = $service->addNewData($request->validated());
 
-        if ($this->isError($response, "masters.roles.create")) return $this->getErrorResponse();
+        if ($this->isError($response, "user.managements.roles.create")) return $this->getErrorResponse();
 
-        return redirect()->route("masters.roles.index")->with("success", "Add new role successfully");
+        return redirect()->route("user.managements.roles.index")->with("success", "Add new role successfully");
     }
 
     /**
@@ -61,7 +61,7 @@ class RoleController extends Controller
     {
         $response = $service->deleteDataById($id);
         if ($this->isError($response)) return $this->getErrorResponse();
-        return redirect()->route("masters.roles.index")->with("success", "Delete role successfully");
+        return redirect()->route("user.managements.roles.index")->with("success", "Delete role successfully");
     }
 
     /**
@@ -76,7 +76,7 @@ class RoleController extends Controller
         $response = $service->getEditData($id);
         if ($this->isError($response)) return $this->getErrorResponse();
         viewShare($response);
-        return response()->view("masters.roles.edit");
+        return response()->view("user-managements.roles.edit");
     }
 
 
@@ -92,6 +92,6 @@ class RoleController extends Controller
     {
         $response = $service->updateDataById($id, $request->validated());
         if ($this->isError($response)) return $this->getErrorResponse();
-        return redirect()->route("masters.roles.index")->with("success", "Update data role successfully");
+        return redirect()->route("user.managements.roles.index")->with("success", "Update data role successfully");
     }
 }
