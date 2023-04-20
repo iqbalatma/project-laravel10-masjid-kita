@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use App\Statics\Permissions\DistrictPermission;
+use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -34,6 +35,10 @@ class UserSeeder extends Seeder
         $role->givePermissionTo(VillagePermission::STORE);
         $role->givePermissionTo(VillagePermission::UPDATE);
         $role->givePermissionTo(VillagePermission::DESTROY);
+        $role->givePermissionTo(MosquePermission::INDEX);
+        $role->givePermissionTo(MosquePermission::STORE);
+        $role->givePermissionTo(MosquePermission::UPDATE);
+        $role->givePermissionTo(MosquePermission::DESTROY);
         $role->givePermissionTo(SubdistrictPermission::INDEX);
         $role->givePermissionTo(SubdistrictPermission::STORE);
         $role->givePermissionTo(SubdistrictPermission::UPDATE);

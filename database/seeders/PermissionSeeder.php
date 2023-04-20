@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Permission;
 use App\Statics\Permissions\DistrictPermission;
+use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -40,6 +41,9 @@ class PermissionSeeder extends Seeder
             Permission::create(["name" => $value]);
         }
         foreach ((new \ReflectionClass(VillagePermission::class))->getConstants() as $key => $value) {
+            Permission::create(["name" => $value]);
+        }
+        foreach ((new \ReflectionClass(MosquePermission::class))->getConstants() as $key => $value) {
             Permission::create(["name" => $value]);
         }
     }

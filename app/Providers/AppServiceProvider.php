@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Statics\Permissions\DistrictPermission;
+use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             "districtPermissions" => DistrictPermission::class,
             "subdistrictPermissions" => SubdistrictPermission::class,
             "villagePermissions" => VillagePermission::class,
+            "mosquePermissions" => MosquePermission::class,
         ]);
     }
 }

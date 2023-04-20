@@ -41,25 +41,6 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Data Master</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{ route('masters.districts.index') }}">Kabupaten</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('masters.subdistricts.index') }}">Kecamatan</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('masters.villages.index') }}">Desa/Kelurahan</a>
-                        </li>
-                    </ul>
-                </li>
-
-
                 @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX])
                 <li class="sidebar-title">Data Masters</li>
                 @can($districtPermissions::INDEX)
@@ -83,6 +64,14 @@
                     <a href="{{ route('masters.villages.index') }}" class='sidebar-link'>
                         <i class="fa-solid fa-list"></i>
                         <span>Desa/Kelurahan</span>
+                    </a>
+                </li>
+                @endcan
+                @can($mosquePermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('masters.mosques.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-list"></i>
+                        <span>Masjid</span>
                     </a>
                 </li>
                 @endcan
