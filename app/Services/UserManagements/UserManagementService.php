@@ -139,11 +139,7 @@ class UsermanagementService extends BaseService implements UserManagementService
         try {
             $this->checkData($id);
             $user = $this->getData();
-            if ($user->status == "active") {
-                $user->status = "inactive";
-            } else {
-                $user->status = "active";
-            }
+            $user->status = $user->status == "active" ? "inactive" : "active";
             $user->save();
             $response = [
                 "success" => true,
