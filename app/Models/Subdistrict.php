@@ -11,4 +11,9 @@ class Subdistrict extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ["code", "district_id", "name"];
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
 }

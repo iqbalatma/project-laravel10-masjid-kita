@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
+use App\Statics\Permissions\SubdistrictPermission;
 use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Roles;
 use Illuminate\Database\Seeder;
@@ -28,6 +29,10 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::findById(1);
+        $role->givePermissionTo(SubdistrictPermission::INDEX);
+        $role->givePermissionTo(SubdistrictPermission::STORE);
+        $role->givePermissionTo(SubdistrictPermission::UPDATE);
+        $role->givePermissionTo(SubdistrictPermission::DESTROY);
         $role->givePermissionTo(DistrictPermission::INDEX);
         $role->givePermissionTo(DistrictPermission::STORE);
         $role->givePermissionTo(DistrictPermission::UPDATE);

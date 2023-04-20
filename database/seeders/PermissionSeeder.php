@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
+use App\Statics\Permissions\SubdistrictPermission;
 use App\Statics\Permissions\UserManagementPermission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -32,6 +33,9 @@ class PermissionSeeder extends Seeder
             Permission::create(["name" => $value]);
         }
         foreach ((new \ReflectionClass(DistrictPermission::class))->getConstants() as $key => $value) {
+            Permission::create(["name" => $value]);
+        }
+        foreach ((new \ReflectionClass(SubdistrictPermission::class))->getConstants() as $key => $value) {
             Permission::create(["name" => $value]);
         }
     }

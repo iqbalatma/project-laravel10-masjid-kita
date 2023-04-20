@@ -3,6 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\SubdistrictServiceInterface;
+use App\Repositories\DistrictRepository;
 use App\Repositories\SubdistrictRepository;
 use App\Services\BaseService;
 use Exception;
@@ -10,10 +11,12 @@ use Exception;
 class SubdistrictService extends BaseService implements SubdistrictServiceInterface
 {
     protected $repository;
+    protected $districtRepo;
     protected array $breadcumbs;
     public function __construct()
     {
         $this->repository = new SubdistrictRepository();
+        $this->districtRepo = new DistrictRepository();
 
         //FIXME - this is default, data, need to wait for link
         $this->breadcumbs = [
@@ -35,7 +38,8 @@ class SubdistrictService extends BaseService implements SubdistrictServiceInterf
             "title" => "Subdstricts",
             "description" => "Data of subdistrict",
             "breadcumbs" => $this->getBreadcumbs(),
-            "subdistricts" => $this->repository->getAllDataPaginated()
+            "subdistricts" => $this->repository->getAllDataPaginated(),
+            "districts" => $this->districtRepo->getAllData()
         ];
     }
 
