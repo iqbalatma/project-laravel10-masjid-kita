@@ -78,7 +78,7 @@
                 @can($transactionTypePermissions::INDEX)
                 <li class="sidebar-item">
                     <a href="{{ route('masters.transaction.types.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-mosque"></i>
+                        <i class="fa-solid fa-money-bills"></i>
                         <span>Transaction Type</span>
                     </a>
                 </li>
