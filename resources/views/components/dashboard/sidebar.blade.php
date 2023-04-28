@@ -121,7 +121,7 @@
                 @endcan
                 @can($permissionPermissions::INDEX)
                 <li class="sidebar-item">
-                    <a href="{{ route('user.managements.roles.index') }}" class='sidebar-link'>
+                    <a href="{{ route('user.managements.permissions.index') }}" class='sidebar-link'>
                         <i class="fa-solid fa-user-lock"></i>
                         <span>Izin Akses</span>
                     </a>
