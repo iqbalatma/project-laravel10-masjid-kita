@@ -11,7 +11,7 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        "description", "amount", "type", "method", "mosque_id", "user_id"
+        "description", "amount", "transaction_type_id", "method", "mosque_id", "user_id"
     ];
 
     public function mosque()
@@ -22,5 +22,10 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function transaction_type()
+    {
+        return $this->belongsTo(TransactionType::class);
     }
 }

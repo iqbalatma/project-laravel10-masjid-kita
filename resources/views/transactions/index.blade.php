@@ -25,8 +25,10 @@
                         <td>{{ $transactions->firstItem() + $key }}</td>
                         <td>{{ $transaction->mosque->name }}</td>
                         <td>{{ formatToRupiah($transaction->amount) }}</td>
-                        <td>{{ ucwords($transaction->type) }}</td>
-                        <td>{{ ucwords($transaction->method) }}</td>
+                        <td>{{ ucwords($transaction->transaction_type->name) }}</td>
+                        <td>
+                            <span @class(['badge rounded-pill', 'bg-success'=> $transaction->method=='income', 'bg-danger'=> $transaction->method=='expense'])>{{ ucwords($transaction->method) }}</span>
+                        </td>
                         <td>{{ $transaction->user->name }}</td>
                         <td>{{ $transaction->created_at }}</td>
                     </tr>

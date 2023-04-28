@@ -19,9 +19,9 @@ class TransactionFactory extends Factory
         return [
             "description" => fake()->text(),
             "amount" => fake()->numberBetween(10000, 1000000000),
-            "type" => fake()->randomElement(["infaq", "hibah", "wakaf", "iuran", "donasi", "zakat", "perawatan", "air", "listrik", "gaji", "operasional", "sumbangan"]),
             "method" => fake()->randomElement(["income", "expense"]),
             "mosque_id" => fake()->numberBetween(1, 10),
+            "transaction_type_id" => fake()->numberBetween(1, 5),
             "user_id" => 1
         ];
     }

@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('transaction_types', function (Blueprint $table) {
             $table->id();
-            $table->text("description")->default("-");
-            $table->decimal("amount", 14, 2)->default(0);
-            $table->unsignedBigInteger("transaction_type_id");
-            $table->enum("method", ["income", "expense"]);
-            $table->unsignedBigInteger("mosque_id");
-            $table->unsignedBigInteger("user_id");
+            $table->string("name");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('transaction_types');
     }
 };

@@ -9,6 +9,13 @@ use Illuminate\Http\Response;
 
 class TransactionController extends Controller
 {
+
+    /**
+     * Use to show transaction
+     *
+     * @param TransactionService $service
+     * @return Response
+     */
     public function index(TransactionService $service): Response
     {
         viewShare($service->getAllData());

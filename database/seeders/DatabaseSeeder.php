@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             DistrictSeeder::class,
             UserSeeder::class,
             MosqueSeeder::class,
+            TransactionTypeSeeder::class,
             TransactionSeeder::class
         ]);
     }
