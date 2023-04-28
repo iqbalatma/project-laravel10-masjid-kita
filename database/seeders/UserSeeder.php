@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\MosquePermission;
+use App\Statics\Permissions\MosqueTransactionPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::findById(1);
+        $role->givePermissionTo(MosqueTransactionPermission::INDEX);
         $role->givePermissionTo(TransactionTypePermission::INDEX);
         $role->givePermissionTo(TransactionTypePermission::STORE);
         $role->givePermissionTo(TransactionTypePermission::UPDATE);

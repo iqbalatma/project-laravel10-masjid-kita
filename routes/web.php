@@ -10,9 +10,11 @@ use App\Http\Controllers\UserManagements\PermissionController;
 use App\Http\Controllers\UserManagements\RoleController;
 use App\Http\Controllers\Masters\VillageController;
 use App\Http\Controllers\Masters\SubdistrictController;
+use App\Http\Controllers\Mosques\MosqueTransactionController;
 use App\Http\Controllers\Transactions\TransactionController;
 use App\Http\Controllers\UserManagements\UserManagementController;
 use App\Statics\Permissions\DistrictPermission;
+use App\Statics\Permissions\MosqueTransactionPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -117,6 +119,12 @@ Route::middleware("auth")->group(function () {
             Route::post("/", "store")->name("store")->middleware("permission:" . TransactionPermission::STORE);
             Route::put("/{id}", "update")->name("update")->middleware("permission:" . TransactionPermission::UPDATE);
             Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . TransactionPermission::DESTROY);
+        });
+    });
+
+    Route::prefix("mosques/{mosque_id}")->name("mosque.")->group(function () {
+        Route::prefix("transactions")->name("transactions.")->controller(MosqueTransactionController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . MosqueTransactionPermission::INDEX);
         });
     });
 });
