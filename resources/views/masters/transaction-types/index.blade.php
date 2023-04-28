@@ -30,21 +30,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($transactionTypes as $key => $mosque)
+                    @foreach ($transactionTypes as $key => $type)
                     <tr>
                         <td>{{ $transactionTypes->firstItem() + $key }}</td>
-                        <td>{{ ucwords($mosque->name) }}</td>
-                        <td>{{ $mosque->updated_at }}</td>
+                        <td>{{ ucwords($type->name) }}</td>
+                        <td>{{ $type->updated_at }}</td>
                         @canany([$transactionTypePermissions::UPDATE,$transactionTypePermissions::DESTROY])
                         <td>
                             @can($districtPermissions::UPDATE)
-                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-mosque="{{ $mosque }}">
+                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-transaction-type="{{ $type }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
 
                             @can($transactionTypePermissions::DESTROY)
-                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ $mosque->id }}">
+                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ $type->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
                             @endcan
@@ -62,47 +62,30 @@
 
     @can($transactionTypePermissions::UPDATE)
     <!-- Modal Edit -->
-    {{-- <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
+    <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-editLabel">Sunting Masjid</h5>
+                    <h5 class="modal-title" id="modal-editLabel">Sunting Tipe Transaksi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.mosques.update', ':id') }}">
-    @csrf
-    @method("PUT")
-    <div class="col-md-12">
-        <label for="edit-name" class="form-label">Nama Masjid</label>
-        <input type="text" class="form-control" id="edit-name" name="name">
+                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.transaction.types.update', ':id') }}">
+                        @csrf
+                        @method("PUT")
+                        <div class="col-md-12">
+                            <label for="edit-name" class="form-label">Tipe Transaksi</label>
+                            <input type="text" class="form-control" id="edit-name" name="name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" form="form-edit" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-12">
-        <label for="edit-latitude" class="form-label">Latitude</label>
-        <input type="text" class="form-control" id="edit-latitude" name="latitude">
-    </div>
-    <div class="col-md-12">
-        <label for="edit-longitude" class="form-label">Longitude</label>
-        <input type="text" class="form-control" id="edit-longitude" name="longitude">
-    </div>
-    <div class="col-md-12">
-        <label for="edit-village" class="form-label">Desa/Kelurahan</label>
-        <select id="edit-village" class="form-select" name="village_id">
-            <option selected>Pilih Desa/Kelurahan</option>
-            @foreach($villages as $key => $village)
-            <option value="{{ $village->id }}">{{ ucwords($village->name) }}</option>
-            @endforeach
-        </select>
-    </div>
-    </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" form="form-edit" class="btn btn-primary">Save changes</button>
-    </div>
-    </div>
-    </div>
-    </div> --}}
     @endcan
 
 

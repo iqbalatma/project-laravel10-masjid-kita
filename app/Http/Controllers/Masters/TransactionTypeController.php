@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Masters;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Masters\TransactionTypes\StoreTransactionTypeRequest;
+use App\Http\Requests\Masters\TransactionTypes\UpdateTransactionTypeRequest;
 use App\Services\Masters\TransactionTypeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -23,6 +24,20 @@ class TransactionTypeController extends Controller
         return response()->view("masters.transaction-types.index");
     }
 
+    /**
+     * Use to update data mosoque
+     *
+     * @param TransactionTypeService $service
+     * @param UpdateTransactionTypeRequest $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function update(TransactionTypeService $service, UpdateTransactionTypeRequest $request, int $id): RedirectResponse
+    {
+        $response = $service->updateDataById($id, $request->validated());
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Perbaharui data tipe transaksi berhasil"]);
+    }
 
     /**
      * Use to add new data transaction

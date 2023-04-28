@@ -6,14 +6,11 @@ $(function(){
     let defaultDeleteUrl = $("#form-delete").attr("action");
 
     $(".btn-edit").on("click", function(){
-        const mosque = $(this).data("mosque");
+        const type = $(this).data("transaction-type");
 
-        $("#edit-name").val(mosque.name);
-        $("#edit-latitude").val(mosque.latitude);
-        $("#edit-longitude").val(mosque.longitude);
-        $("#edit-village").val(mosque.village_id);
+        $("#edit-name").val(type.name);
 
-        changeFormUrlWithId(mosque.id, defaultEditUrl, "#form-edit");
+        changeFormUrlWithId(type.id, defaultEditUrl, "#form-edit");
     })
 
     $(".btn-delete").on("click", function(){

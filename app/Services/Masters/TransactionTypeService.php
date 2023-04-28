@@ -101,9 +101,9 @@ class TransactionTypeService extends BaseService implements TransactionTypeServi
         try {
             $this->checkData($id);
 
-            $subdistrict = $this->getData();
-            $subdistrict->fill($requestedData);
-            $subdistrict->save();
+            $transactionType = $this->getData();
+            $transactionType->fill($requestedData);
+            $transactionType->save();
 
             $response = [
                 "success" => true,
