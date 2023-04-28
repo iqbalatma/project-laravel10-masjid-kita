@@ -134,13 +134,13 @@
     @endcan
 
     @can($transactionTypePermissions::DESTROY)
-    <form id="form-delete" action="{{ route('masters.mosques.destroy', ':id') }}" class="d-none" method="POST">
+    <form id="form-delete" action="{{ route('masters.transaction.types.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
     @endcan
 
     @push("scripts")
-    @vite("resources/js/pages/masters/mosques/index.js")
+    @vite("resources/js/pages/masters/transaction-types/index.js")
     @endpush
 </x-dashboard.layout>

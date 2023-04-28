@@ -37,4 +37,18 @@ class TransactionTypeController extends Controller
         if ($this->isError($response)) return $this->getErrorResponse();
         return redirect()->back()->with(["success" => "Tambah data tipe transaksi berhasil"]);
     }
+
+    /**
+     * Use to delete data by id
+     *
+     * @param TransactionTypeService $service
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function destroy(TransactionTypeService $service, int $id): RedirectResponse
+    {
+        $response = $service->deleteDataById($id);
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Hapus data tipe transaksi berhasil"]);
+    }
 }
