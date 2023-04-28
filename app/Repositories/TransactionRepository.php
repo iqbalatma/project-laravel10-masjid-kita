@@ -14,4 +14,12 @@ class TransactionRepository extends BaseRepository
     {
         $this->model = new Transaction();
     }
+
+    public function getDataByWhereClausePaginated(array $whereClause, array $columns = ["*"])
+    {
+        return $this->model
+            ->select($columns)
+            ->where($whereClause)
+            ->paginate(request()->query("perpage", config("servicerepo.perpage")));
+    }
 }

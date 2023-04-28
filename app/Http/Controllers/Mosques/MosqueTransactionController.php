@@ -9,9 +9,9 @@ use Illuminate\Http\Response;
 
 class MosqueTransactionController extends Controller
 {
-    public function index(MosqueTransactionService $service): Response
+    public function index(MosqueTransactionService $service, int $mosqueId): Response
     {
-        viewShare($service->getAllData());
+        viewShare($service->getAllData($mosqueId));
         return response()->view("mosques.transactions.index");
     }
 }
