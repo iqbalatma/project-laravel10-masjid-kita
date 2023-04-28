@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string("longitude");
             $table->string("area_wide")->nullable();
             $table->decimal("balance", 14, 2)->default(0);
-            $table->decimal("claim", 14, 2)->default(0);
+            $table->decimal("donation", 14, 2)->default(0);
+            $table->decimal("contribution", 14, 2)->default(0);
+            $table->decimal("infaq", 14, 2)->default(0);
+            $table->decimal("zakat", 14, 2)->default(0);
             $table->decimal("debt", 14, 2)->default(0);
             $table->unsignedBigInteger("village_id");
             $table->timestamps();
