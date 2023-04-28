@@ -41,7 +41,7 @@
                     </a>
                 </li>
 
-                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX])
+                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX, $mosquePermissions::INDEX])
                 <li class="sidebar-title">Data Masters</li>
                 @can($districtPermissions::INDEX)
                 <li class="sidebar-item">
@@ -70,12 +70,36 @@
                 @can($mosquePermissions::INDEX)
                 <li class="sidebar-item">
                     <a href="{{ route('masters.mosques.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
+                        <i class="fa-solid fa-mosque"></i>
                         <span>Masjid</span>
                     </a>
                 </li>
                 @endcan
+                @can($transactionTypePermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('masters.transaction.types.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-money-bills"></i>
+                        <span>Transaction Type</span>
+                    </a>
+                </li>
+                @endcan
                 @endcanany
+
+
+                @canany([$transactionPermissions::INDEX])
+                <li class="sidebar-title">Data Transaksi</li>
+
+                @can($transactionPermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('transactions.index') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-right-left"></i>
+                        <span>Transaksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @endcanany
+
 
                 @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
                 <li class="sidebar-title">User Managements</li>
@@ -97,7 +121,7 @@
                 @endcan
                 @can($permissionPermissions::INDEX)
                 <li class="sidebar-item">
-                    <a href="{{ route('user.managements.roles.index') }}" class='sidebar-link'>
+                    <a href="{{ route('user.managements.permissions.index') }}" class='sidebar-link'>
                         <i class="fa-solid fa-user-lock"></i>
                         <span>Izin Akses</span>
                     </a>

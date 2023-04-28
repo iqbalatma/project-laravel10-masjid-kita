@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Masters\TransactionTypeController;
 use App\Statics\Permissions\MosquePermission;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Masters\DistrictController;
@@ -9,11 +10,14 @@ use App\Http\Controllers\UserManagements\PermissionController;
 use App\Http\Controllers\UserManagements\RoleController;
 use App\Http\Controllers\Masters\VillageController;
 use App\Http\Controllers\Masters\SubdistrictController;
+use App\Http\Controllers\Transactions\TransactionController;
 use App\Http\Controllers\UserManagements\UserManagementController;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
+use App\Statics\Permissions\TransactionPermission;
+use App\Statics\Permissions\TransactionTypePermission;
 use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Permissions\VillagePermission;
 
@@ -63,6 +67,15 @@ Route::middleware("auth")->group(function () {
     });
 
     Route::prefix("masters")->name("masters.")->group(function () {
+        // TRANSACTION TYPE
+        Route::prefix("transaction-types")->name("transaction.types.")->controller(TransactionTypeController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . TransactionTypePermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . TransactionTypePermission::STORE);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . TransactionTypePermission::UPDATE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . TransactionTypePermission::DESTROY);
+        });
+
+
         // MOSQUES
         Route::prefix("mosques")->name("mosques.")->controller(MosqueController::class)->group(function () {
             Route::get("/", "index")->name("index")->middleware("permission:" . MosquePermission::INDEX);
@@ -95,6 +108,15 @@ Route::middleware("auth")->group(function () {
             Route::post("/", "store")->name("store")->middleware("permission:" . VillagePermission::STORE);
             Route::put("/{id}", "update")->name("update")->middleware("permission:" . VillagePermission::UPDATE);
             Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . VillagePermission::DESTROY);
+        });
+    });
+
+    Route::prefix("transactions")->name("transactions.")->group(function () {
+        Route::controller(TransactionController::class)->group(function () {
+            Route::get("/", "index")->name("index")->middleware("permission:" . TransactionPermission::INDEX);
+            Route::post("/", "store")->name("store")->middleware("permission:" . TransactionPermission::STORE);
+            Route::put("/{id}", "update")->name("update")->middleware("permission:" . TransactionPermission::UPDATE);
+            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . TransactionPermission::DESTROY);
         });
     });
 });

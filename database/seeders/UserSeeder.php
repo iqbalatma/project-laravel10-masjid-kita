@@ -9,6 +9,8 @@ use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
+use App\Statics\Permissions\TransactionPermission;
+use App\Statics\Permissions\TransactionTypePermission;
 use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Permissions\VillagePermission;
 use App\Statics\Roles;
@@ -31,6 +33,14 @@ class UserSeeder extends Seeder
         ]);
 
         $role = Role::findById(1);
+        $role->givePermissionTo(TransactionTypePermission::INDEX);
+        $role->givePermissionTo(TransactionTypePermission::STORE);
+        $role->givePermissionTo(TransactionTypePermission::UPDATE);
+        $role->givePermissionTo(TransactionTypePermission::DESTROY);
+        $role->givePermissionTo(TransactionPermission::INDEX);
+        $role->givePermissionTo(TransactionPermission::STORE);
+        $role->givePermissionTo(TransactionPermission::UPDATE);
+        $role->givePermissionTo(TransactionPermission::DESTROY);
         $role->givePermissionTo(VillagePermission::INDEX);
         $role->givePermissionTo(VillagePermission::STORE);
         $role->givePermissionTo(VillagePermission::UPDATE);

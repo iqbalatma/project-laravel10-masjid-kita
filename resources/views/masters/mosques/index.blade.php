@@ -26,6 +26,12 @@
                         <th scope="col">Latitude</th>
                         <th scope="col">Longitude</th>
                         <th scope="col">Luas Wilayah</th>
+                        <th scope="col">Total Saldo</th>
+                        <th scope="col">Infaq</th>
+                        <th scope="col">Iuran</th>
+                        <th scope="col">Donation</th>
+                        <th scope="col">Zakat</th>
+                        <th scope="col">Hutang</th>
                         <th scope="col">Terakhir Diperbaharui</th>
                         @canany([$mosquePermissions::UPDATE,$mosquePermissions::DESTROY])
                         <th scope="col">Aksi</th>
@@ -40,6 +46,12 @@
                         <td>{{ $mosque->latitude }}</td>
                         <td>{{ $mosque->longitude }}</td>
                         <td>{{ $mosque->area_wide }} m<sup>2</sup></td>
+                        <td>{{ formatToRupiah($mosque->balance) }}</td>
+                        <td>{{ formatToRupiah($mosque->infaq) }}</td>
+                        <td>{{ formatToRupiah($mosque->contribution) }}</td>
+                        <td>{{ formatToRupiah($mosque->donation) }}</td>
+                        <td>{{ formatToRupiah($mosque->zakat) }}</td>
+                        <td>{{ formatToRupiah($mosque->debt) }}</td>
                         <td>{{ $mosque->updated_at }}</td>
                         @canany([$mosquePermissions::UPDATE,$mosquePermissions::DESTROY])
                         <td>

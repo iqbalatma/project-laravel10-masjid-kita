@@ -9,6 +9,7 @@ let js = [
     "resources/js/pages/masters/subdistricts/index.js",
     "resources/js/pages/masters/villages/index.js",
     "resources/js/pages/masters/mosques/index.js",
+    "resources/js/pages/masters/transaction-types/index.js",
     "resources/js/pages/user-managements/roles/index.js",
     "resources/js/pages/user-managements/users/index.js",
 ];

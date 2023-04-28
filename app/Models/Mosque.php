@@ -15,6 +15,9 @@ class Mosque extends Model
         "latitude",
         "longitude",
         "area_wide",
-        "village_id"
+        "village_id",
+        "balance",
+        "claim",
+        "debt",
     ];
 }
