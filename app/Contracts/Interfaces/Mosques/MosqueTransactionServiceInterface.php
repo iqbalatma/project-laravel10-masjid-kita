@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Interfaces\Mosques;
 
-interface MosqueTransactionServiceInterface {
-
-
+interface MosqueTransactionServiceInterface
+{
+    public function getAllData(int $mosqueId): array;
 }

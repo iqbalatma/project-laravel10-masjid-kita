@@ -8,7 +8,6 @@ use App\Repositories\TransactionRepository;
 use App\Services\BaseService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MosqueTransactionService extends BaseService implements MosqueTransactionServiceInterface
 {
