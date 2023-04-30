@@ -57,4 +57,9 @@ class User extends Authenticatable
             set: fn (string $value) => Hash::make($value),
         );
     }
+
+    public function mosque()
+    {
+        return $this->belongsToMany(Mosque::class);
+    }
 }

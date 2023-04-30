@@ -6,6 +6,8 @@ use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
 use App\Repositories\MosqueRepository;
 use App\Repositories\TransactionRepository;
 use App\Services\BaseService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MosqueTransactionService extends BaseService implements MosqueTransactionServiceInterface
@@ -32,6 +34,12 @@ class MosqueTransactionService extends BaseService implements MosqueTransactionS
     public function getAllData(int $mosqueId): array
     {
         $mosque = $this->mosqueRepo->getDataById($mosqueId);
+        if (!$mosque) {
+            abort(JsonResponse::HTTP_NOT_FOUND);
+        }
+        if (!$mosque->user->contains(Auth::id())) {
+            abort(JsonResponse::HTTP_FORBIDDEN);
+        }
         return [
             "title" => "Transaksi Masjid $mosque->name",
             "cardTitle" => "Transaksi Masjid",

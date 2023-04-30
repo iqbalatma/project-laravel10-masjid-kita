@@ -100,20 +100,7 @@
 
                 @endcanany
 
-
-                @canany([$transactionPermissions::INDEX])
-                <li class="sidebar-title">Transaksi Masjid</li>
-
-                @can($transactionPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('transactions.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-right-left"></i>
-                        <span>Transaksi</span>
-                    </a>
-                </li>
-                @endcan
-
-                @endcanany
+                <x-mosque-menu></x-mosque-menu>
 
 
                 @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
