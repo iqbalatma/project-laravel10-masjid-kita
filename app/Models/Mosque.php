@@ -20,4 +20,9 @@ class Mosque extends Model
         "claim",
         "debt",
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

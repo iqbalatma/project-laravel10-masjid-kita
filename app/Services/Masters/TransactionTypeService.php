@@ -4,19 +4,16 @@ namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\TransactionTypeServiceInterface;
 use App\Repositories\TransactionTypeRepository;
-use App\Repositories\VillageRepository;
 use App\Services\BaseService;
 use Exception;
 
 class TransactionTypeService extends BaseService implements TransactionTypeServiceInterface
 {
     protected $repository;
-    protected $villageRepo;
 
     public function __construct()
     {
         $this->repository = new TransactionTypeRepository();
-        $this->villageRepo = new VillageRepository();
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
             "masters" => "#",

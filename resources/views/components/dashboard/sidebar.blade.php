@@ -100,6 +100,8 @@
 
                 @endcanany
 
+                <x-mosque-menu></x-mosque-menu>
+
 
                 @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
                 <li class="sidebar-title">User Managements</li>
