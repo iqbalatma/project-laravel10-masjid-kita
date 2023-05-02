@@ -22,7 +22,9 @@ class TransactionFactory extends Factory
             "method" => fake()->randomElement(["income", "expense"]),
             "mosque_id" => fake()->numberBetween(1, 10),
             "transaction_type_id" => fake()->numberBetween(1, 5),
-            "user_id" => 1
+            "user_id" => 1,
+            "status" => fake()->randomElement(["pending", "approved", "rejected"]),
+            "status_changed_by" => 1,
         ];
     }
 }

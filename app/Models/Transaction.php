@@ -11,7 +11,7 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        "description", "amount", "transaction_type_id", "method", "mosque_id", "user_id"
+        "description", "amount", "transaction_type_id", "method", "mosque_id", "user_id", "status_changed_by", "status_change_at", "status"
     ];
 
     public function mosque()

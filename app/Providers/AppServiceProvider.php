@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\MosquePermission;
+use App\Statics\Permissions\MosqueTransactionPermission;
 use App\Statics\Permissions\PermissionPermission;
 use App\Statics\Permissions\RolePermission;
 use App\Statics\Permissions\SubdistrictPermission;
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
             "mosquePermissions" => MosquePermission::class,
             "transactionPermissions" => TransactionPermission::class,
             "transactionTypePermissions" => TransactionTypePermission::class,
+            "mosqueTransactionPermissions" => MosqueTransactionPermission::class,
         ]);
     }
 }

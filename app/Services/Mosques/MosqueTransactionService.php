@@ -2,21 +2,23 @@
 
 namespace App\Services\Mosques;
 
+use App\Contracts\Abstracts\Mosques\BaseMosqueTransactionService;
 use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
-use App\Repositories\MosqueRepository;
+use App\Models\TransactionType;
 use App\Repositories\TransactionRepository;
-use App\Services\BaseService;
-use Illuminate\Http\JsonResponse;
+use App\Repositories\TransactionTypeRepository;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class MosqueTransactionService extends BaseService implements MosqueTransactionServiceInterface
+class MosqueTransactionService extends BaseMosqueTransactionService implements MosqueTransactionServiceInterface
 {
     protected $repository;
-    private MosqueRepository $mosqueRepo;
+    private TransactionTypeRepository $transactionTypeRepo;
     public function __construct()
     {
+        parent::__construct();
         $this->repository = new TransactionRepository();
-        $this->mosqueRepo = new MosqueRepository();
+        $this->transactionTypeRepo = new TransactionTypeRepository();
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
             "masters" => "#",
@@ -32,19 +34,44 @@ class MosqueTransactionService extends BaseService implements MosqueTransactionS
      */
     public function getAllData(int $mosqueId): array
     {
-        $mosque = $this->mosqueRepo->getDataById($mosqueId);
-        if (!$mosque) {
-            abort(JsonResponse::HTTP_NOT_FOUND);
-        }
-        if (!$mosque->user->contains(Auth::id())) {
-            abort(JsonResponse::HTTP_FORBIDDEN);
-        }
+        $this->checkAccess($mosqueId);
+        $mosque = $this->getMosque();
         return [
             "title" => "Transaksi Masjid $mosque->name",
             "cardTitle" => "Transaksi Masjid",
             "description" => "Transaksi Masjid",
             "breadcumbs" => $this->getBreadcumbs(),
+            "transactionTypes" => $this->transactionTypeRepo->getAllData(),
             "transactions" =>  $this->repository->with(["mosque"])->getDataByWhereClausePaginated(["mosque_id" => $mosqueId]),
         ];
+    }
+
+
+    /**
+     * Yse to add data transaction
+     *
+     * @param array $requestedData
+     * @param integer $mosqueId
+     * @return array
+     */
+    public function addNewData(array $requestedData, int $mosqueId): array
+    {
+        $this->checkAccess($mosqueId);
+        try {
+            $requestedData["mosque_id"] = $mosqueId;
+            $requestedData["user_id"] = Auth::id();
+            $this->repository->addNewData($requestedData);
+
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
+            ];
+        }
+
+        return $response;
     }
 }

@@ -35,6 +35,7 @@ class UserSeeder extends Seeder
 
         $role = Role::findById(1);
         $role->givePermissionTo(MosqueTransactionPermission::INDEX);
+        $role->givePermissionTo(MosqueTransactionPermission::STORE);
         $role->givePermissionTo(TransactionTypePermission::INDEX);
         $role->givePermissionTo(TransactionTypePermission::STORE);
         $role->givePermissionTo(TransactionTypePermission::UPDATE);
