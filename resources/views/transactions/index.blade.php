@@ -16,6 +16,9 @@
                         <th scope="col">Tipe</th>
                         <th scope="col">Metode</th>
                         <th scope="col">Aktor Pelaksana</th>
+                        <th scope="col">Status Pengajuan</th>
+                        <th scope="col">Perubahan Status Oleh</th>
+                        <th scope="col">Tanggal Perubahan Status</th>
                         <th scope="col">Tanggal Transaksi</th>
                     </tr>
                 </thead>
@@ -30,6 +33,9 @@
                             <span @class(['badge rounded-pill', 'bg-success'=> $transaction->method=='income', 'bg-danger'=> $transaction->method=='expense'])>{{ ucwords($transaction->method) }}</span>
                         </td>
                         <td>{{ $transaction->user->name }}</td>
+                        <td>{{ ucwords($transaction->status) }}</td>
+                        <td>{{ $transaction->status_changer->name }}</td>
+                        <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
                     </tr>
                     @endforeach

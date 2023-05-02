@@ -99,7 +99,6 @@
                 @endcan
 
                 @endcanany
-
                 <x-mosque-menu></x-mosque-menu>
 
 

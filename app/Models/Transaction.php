@@ -24,6 +24,11 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function status_changer()
+    {
+        return $this->belongsTo(User::class, "status_changed_by");
+    }
+
     public function transaction_type()
     {
         return $this->belongsTo(TransactionType::class);
