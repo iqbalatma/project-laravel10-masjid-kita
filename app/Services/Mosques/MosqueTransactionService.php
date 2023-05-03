@@ -23,7 +23,6 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
             "masters" => "#",
-            "transaksi masjid" => route("mosque.transactions.index", ["mosque_id" => request()->route("mosque_id"), "type" => request()->route("type")])
         ];
     }
 
@@ -38,6 +37,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
     public function getAllData(int $mosqueId, string $type): array
     {
         $this->checkAccess($mosqueId);
+        $this->addBreadCumbs(["transaksi masjid" => route("mosque.transactions.index", ["mosque_id" => request()->route("mosque_id"), "type" => request()->route("type")])]);
         $mosque = $this->getMosque();
 
         $dataResponse = [
@@ -48,12 +48,12 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             $dataResponse["title"] = "Semua Data Transaksi Majsid $mosque->name";
             $dataResponse["cardTitle"] = "Transaksi Masjid";
             $dataResponse["description"] = "Semua data transaksi pada masjid";
-            $dataResponse["transactions"] = $this->repository->with(["mosque"])->getDataApprovedTransactionPaginated($mosqueId);
+            $dataResponse["transactions"] = $this->repository->with(["mosque"])->orderBy(["status_change_at"], "status_change_at", "DESC")->getDataApprovedTransactionPaginated($mosqueId);
         } elseif ($type == "submissions") {
             $dataResponse["title"] = "Pengajuan Transaksi Masjid $mosque->name";
             $dataResponse["cardTitle"] = "Pengajuan Transaksi Masjid";
             $dataResponse["description"] = "Semua data pengajuan transaksi yang belum di approved";
-            $dataResponse["transactions"] =  $this->repository->with(["mosque"])->getDataTransactionSubmissionPaginated($mosqueId);
+            $dataResponse["transactions"] =  $this->repository->with(["mosque"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
         }
 
         return $dataResponse;
