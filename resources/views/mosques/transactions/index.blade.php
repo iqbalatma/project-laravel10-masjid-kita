@@ -28,6 +28,7 @@
                         <th scope="col">Status Pengajuan</th>
                         <th scope="col">Tanggal Persetujuan</th>
                         <th scope="col">Tanggal Transaksi</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,14 @@
                         <td>{{ ucwords($transaction->status) ?? "-" }}</td>
                         <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
+                        <td>
+                            @can($mosqueTransactionPermissions::APPROVAL)
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-success btn-approval" data-bs-toggle="modal" data-bs-target="#modal-approval" data-transaction="{{ $transaction }}">
+                                <i class="fa-solid fa-pen-to-square"></i> Persetujuan
+                            </button>
+                            @endcan
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -102,4 +111,39 @@
     </div>
     @endcan
 
+    @can($mosqueTransactionPermissions::APPROVAL)
+    <!-- Modal Edit -->
+    <div class=" modal fade" id="modal-approval" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-editLabel">Persetujuan Transaksi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-approval" class="row g-3" method="POST" action="{{ route('mosque.transactions.approval',['mosque_id'=> request()->route('mosque_id'), 'id'=> ':id']) }}">
+                        @csrf
+                        @method("PUT")
+                        <div class="col-md-12">
+                            <label for="approval-status" class="form-label">Status</label>
+                            <select id="approval-status" class="form-select" name="status">
+                                <option selected>Pilih Status</option>
+                                <option value="rejected">Reject</option>
+                                <option value="approved">Approve</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="form-approval" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endcan
+
+    @push("scripts")
+    @vite("resources/js/pages/mosques/transactions/index.js")
+    @endpush
 </x-dashboard.layout>

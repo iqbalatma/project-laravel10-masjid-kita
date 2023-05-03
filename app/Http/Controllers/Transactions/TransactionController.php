@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Transactions;
 
 use App\Http\Controllers\Controller;
 use App\Services\Transactions\TransactionService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TransactionController extends Controller
@@ -16,9 +15,9 @@ class TransactionController extends Controller
      * @param TransactionService $service
      * @return Response
      */
-    public function index(TransactionService $service): Response
+    public function index(TransactionService $service, string $type = "all"): Response
     {
-        viewShare($service->getAllData());
+        viewShare($service->getAllData($type));
         return response()->view("transactions.index");
     }
 }

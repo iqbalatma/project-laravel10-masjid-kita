@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Mosques;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Mosques\StoreMosqueTransactionRequest;
+use App\Http\Requests\Mosques\Transactions\ApprovalTransactionRequest;
+use App\Http\Requests\Mosques\Transactions\StoreMosqueTransactionRequest;
 use App\Services\Mosques\MosqueTransactionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,5 +40,19 @@ class MosqueTransactionController extends Controller
         $response = $service->addNewData($request->validated(), $mosqueId);
         if ($this->isError($response)) return $this->getErrorResponse()->withInput();
         return redirect()->back()->with(["success" => "Tambah data transaksi berhasil"]);
+    }
+
+    /**
+     * Use to change status of pending transaction
+     *
+     * @param MosqueTransactionService $service
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function approval(MosqueTransactionService $service, ApprovalTransactionRequest $request, int $mosqueId, int $id): RedirectResponse
+    {
+        $response = $service->approval($mosqueId, $id, $request->validated());
+        if ($this->isError($response)) return $this->getErrorResponse();
+        return redirect()->back()->with(["success" => "Perubahan status berhasil !"]);
     }
 }

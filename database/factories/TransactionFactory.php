@@ -25,6 +25,7 @@ class TransactionFactory extends Factory
             "user_id" => 1,
             "status" => fake()->randomElement(["pending", "approved", "rejected"]),
             "status_changed_by" => 1,
+            "created_at" => fake()->dateTimeBetween(),
         ];
     }
 }

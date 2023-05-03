@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Mosques;
+namespace App\Http\Requests\Mosques\Transactions;
 
 use Illuminate\Foundation\Http\FormRequest;
 

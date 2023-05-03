@@ -6,4 +6,5 @@ class MosqueTransactionPermission
 {
     public const INDEX = "mosque.transactions.index";
     public const STORE = "mosque.transactions.store";
+    public const APPROVAL = "mosque.transactions.approval";
 }

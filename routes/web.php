@@ -115,10 +115,8 @@ Route::middleware("auth")->group(function () {
 
     Route::prefix("transactions")->name("transactions.")->group(function () {
         Route::controller(TransactionController::class)->group(function () {
-            Route::get("/", "index")->name("index")->middleware("permission:" . TransactionPermission::INDEX);
-            Route::post("/", "store")->name("store")->middleware("permission:" . TransactionPermission::STORE);
-            Route::put("/{id}", "update")->name("update")->middleware("permission:" . TransactionPermission::UPDATE);
-            Route::delete("/{id}", "destroy")->name("destroy")->middleware("permission:" . TransactionPermission::DESTROY);
+            Route::get("/{type}", "index")->name("index")->middleware("permission:" . TransactionPermission::INDEX);
+            Route::put("/{id}", "approval")->name("approval")->middleware("permission:" . TransactionPermission::APPROVAL);
         });
     });
 
@@ -126,6 +124,7 @@ Route::middleware("auth")->group(function () {
         Route::prefix("transactions")->name("transactions.")->controller(MosqueTransactionController::class)->group(function () {
             Route::get("/", "index")->name("index")->middleware("permission:" . MosqueTransactionPermission::INDEX);
             Route::post("/", "store")->name("store")->middleware("permission:" . MosqueTransactionPermission::STORE);
+            Route::put("/{id}", "approval")->name("approval")->middleware("permission:" . MosqueTransactionPermission::APPROVAL);
         });
     });
 });

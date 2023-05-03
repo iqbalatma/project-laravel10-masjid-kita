@@ -91,9 +91,18 @@
 
                 @can($transactionPermissions::INDEX)
                 <li class="sidebar-item">
-                    <a href="{{ route('transactions.index') }}" class='sidebar-link'>
+                    <a href="{{ route('transactions.index', 'all') }}" class='sidebar-link'>
                         <i class="fa-solid fa-right-left"></i>
                         <span>Transaksi</span>
+                    </a>
+                </li>
+                @endcan
+
+                @can($transactionPermissions::INDEX)
+                <li class="sidebar-item">
+                    <a href="{{ route('transactions.index', 'submissions') }}" class='sidebar-link'>
+                        <i class="fa-solid fa-right-left"></i>
+                        <span>Pengajuan Transaksi</span>
                     </a>
                 </li>
                 @endcan

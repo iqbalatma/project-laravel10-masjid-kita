@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
 use App\Models\TransactionType;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionTypeRepository;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +62,37 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             $requestedData["mosque_id"] = $mosqueId;
             $requestedData["user_id"] = Auth::id();
             $this->repository->addNewData($requestedData);
+
+            $response = [
+                "success" => true,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                "success" => false,
+                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
+            ];
+        }
+
+        return $response;
+    }
+
+    /**
+     * Use to change approval
+     *
+     * @param integer $mosqueId
+     * @param integer $id
+     * @param array $requestedData
+     * @return array
+     */
+    public function approval(int $mosqueId, int $id, array $requestedData): array
+    {
+        $this->checkAccess($mosqueId);
+        try {
+            $this->checkData($id);
+            $transaction = $this->getData();
+            $requestedData["status_change_at"] = Carbon::now();
+            $transaction->fill($requestedData);
+            $transaction->save();
 
             $response = [
                 "success" => true,
