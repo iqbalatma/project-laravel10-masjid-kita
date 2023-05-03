@@ -29,22 +29,34 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
 
 
     /**
-     * Use to get data for index
+     * Use to get all data
      *
+     * @param integer $mosqueId
+     * @param string $type
      * @return array
      */
-    public function getAllData(int $mosqueId): array
+    public function getAllData(int $mosqueId, string $type): array
     {
         $this->checkAccess($mosqueId);
         $mosque = $this->getMosque();
-        return [
-            "title" => "Transaksi Masjid $mosque->name",
-            "cardTitle" => "Transaksi Masjid",
-            "description" => "Transaksi Masjid",
-            "breadcumbs" => $this->getBreadcumbs(),
+
+        $dataResponse = [
             "transactionTypes" => $this->transactionTypeRepo->getAllData(),
-            "transactions" =>  $this->repository->with(["mosque"])->getDataByWhereClausePaginated(["mosque_id" => $mosqueId]),
+            "breadcumbs" => $this->getBreadcumbs(),
         ];
+        if ($type == "all") {
+            $dataResponse["title"] = "Semua Data Transaksi Majsid $mosque->name";
+            $dataResponse["cardTitle"] = "Transaksi Masjid";
+            $dataResponse["description"] = "Semua data transaksi pada masjid";
+            $dataResponse["transactions"] = $this->repository->with(["mosque"])->getDataApprovedTransactionPaginated($mosqueId);
+        } elseif ($type == "submissions") {
+            $dataResponse["title"] = "Pengajuan Transaksi Masjid $mosque->name";
+            $dataResponse["cardTitle"] = "Pengajuan Transaksi Masjid";
+            $dataResponse["description"] = "Semua data pengajuan transaksi yang belum di approved";
+            $dataResponse["transactions"] =  $this->repository->with(["mosque"])->getDataTransactionSubmissionPaginated($mosqueId);
+        }
+
+        return $dataResponse;
     }
 
 

@@ -25,7 +25,7 @@ class MosqueTransactionController extends Controller
         if (!in_array($type, self::TRANSACTION_TYPE)) {
             abort(404);
         }
-        viewShare($service->getAllData($mosqueId));
+        viewShare($service->getAllData($mosqueId, $type));
         return response()->view("mosques.transactions.index");
     }
 

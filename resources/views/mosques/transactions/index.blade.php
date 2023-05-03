@@ -28,7 +28,11 @@
                         <th scope="col">Status Pengajuan</th>
                         <th scope="col">Tanggal Persetujuan</th>
                         <th scope="col">Tanggal Transaksi</th>
+                        @if(request()->route('type')=='submissions')
+                        @can($mosqueTransactionPermissions::APPROVAL)
                         <th scope="col">Action</th>
+                        @endcan
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -48,14 +52,17 @@
 
                         <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
+                        @if(request()->route('type')=='submissions')
+                        @can($mosqueTransactionPermissions::APPROVAL)
                         <td>
-                            @can($mosqueTransactionPermissions::APPROVAL)
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success btn-approval" data-bs-toggle="modal" data-bs-target="#modal-approval" data-transaction="{{ $transaction }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Persetujuan
                             </button>
-                            @endcan
                         </td>
+                        @endcan
+                        @endif
+
                     </tr>
                     @endforeach
                 </tbody>

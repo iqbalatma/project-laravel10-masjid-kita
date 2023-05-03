@@ -22,4 +22,26 @@ class TransactionRepository extends BaseRepository
             ->where($whereClause)
             ->paginate(request()->query("perpage", config("servicerepo.perpage")));
     }
+
+    public function getDataApprovedTransactionPaginated(string $mosqueId, array $columns = ["*"])
+    {
+        return $this->model
+            ->select($columns)
+            ->where([
+                "mosque_id" => $mosqueId,
+            ])
+            ->whereNot("status", "pending")
+            ->paginate(request()->query("perpage", config("servicerepo.perpage")));
+    }
+
+    public function getDataTransactionSubmissionPaginated(string $mosqueId, array $columns = ["*"])
+    {
+        return $this->model
+            ->select($columns)
+            ->where([
+                "mosque_id" => $mosqueId,
+                "status" => "pending"
+            ])
+            ->paginate(request()->query("perpage", config("servicerepo.perpage")));
+    }
 }
