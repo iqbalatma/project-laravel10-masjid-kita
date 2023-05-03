@@ -23,7 +23,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
             "masters" => "#",
-            "transaksi masjid" => route("mosque.transactions.index", ["mosque_id" => request()->route("mosque_id")])
+            "transaksi masjid" => route("mosque.transactions.index", ["mosque_id" => request()->route("mosque_id"), "type" => request()->route("type")])
         ];
     }
 

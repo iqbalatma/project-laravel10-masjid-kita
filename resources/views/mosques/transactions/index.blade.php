@@ -42,7 +42,10 @@
                             <span @class(['badge rounded-pill', 'bg-success'=> $transaction->method=='income', 'bg-danger'=> $transaction->method=='expense'])>{{ ucwords($transaction->method) }}</span>
                         </td>
                         <td>{{ $transaction->user->name }}</td>
-                        <td>{{ ucwords($transaction->status) ?? "-" }}</td>
+                        <td>
+                            <span @class(['badge rounded-pill', 'bg-success'=> $transaction->status=='approved', 'bg-danger'=> $transaction->status=='rejected', 'bg-warning' => $transaction->status == 'pending'])>{{ ucwords($transaction->status) }}</span>
+                        </td>
+
                         <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
                         <td>

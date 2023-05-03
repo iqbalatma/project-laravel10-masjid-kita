@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 
 class MosqueTransactionController extends Controller
 {
-
+    const TRANSACTION_TYPE = ["all", "submissions"];
     /**
      * Use to show transaction by mosque id
      *
@@ -20,8 +20,11 @@ class MosqueTransactionController extends Controller
      * @param integer $mosqueId
      * @return Response
      */
-    public function index(MosqueTransactionService $service, int $mosqueId): Response
+    public function index(MosqueTransactionService $service, int $mosqueId, string $type = "all"): Response
     {
+        if (!in_array($type, self::TRANSACTION_TYPE)) {
+            abort(404);
+        }
         viewShare($service->getAllData($mosqueId));
         return response()->view("mosques.transactions.index");
     }

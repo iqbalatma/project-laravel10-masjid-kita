@@ -122,7 +122,7 @@ Route::middleware("auth")->group(function () {
 
     Route::prefix("mosques/{mosque_id}")->name("mosque.")->group(function () {
         Route::prefix("transactions")->name("transactions.")->controller(MosqueTransactionController::class)->group(function () {
-            Route::get("/", "index")->name("index")->middleware("permission:" . MosqueTransactionPermission::INDEX);
+            Route::get("/{type}", "index")->name("index")->middleware("permission:" . MosqueTransactionPermission::INDEX);
             Route::post("/", "store")->name("store")->middleware("permission:" . MosqueTransactionPermission::STORE);
             Route::put("/{id}", "approval")->name("approval")->middleware("permission:" . MosqueTransactionPermission::APPROVAL);
         });
