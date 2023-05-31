@@ -22,6 +22,9 @@ use App\Statics\Permissions\TransactionPermission;
 use App\Statics\Permissions\TransactionTypePermission;
 use App\Statics\Permissions\UserManagementPermission;
 use App\Statics\Permissions\VillagePermission;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,10 @@ use App\Statics\Permissions\VillagePermission;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/tes', function () {
+    echo "tes";
 });
 
 Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(function () {
