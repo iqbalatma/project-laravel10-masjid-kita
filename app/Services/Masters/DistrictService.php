@@ -48,7 +48,7 @@ class DistrictService extends BaseService implements DistrictServiceInterface
         try {
             $this->checkData($id);
 
-            $district = $this->getData();
+            $district = $this->getServiceEntity();
             $district->fill($requestedData);
             $district->save();
 

@@ -101,7 +101,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
         $this->checkAccess($mosqueId);
         try {
             $this->checkData($id);
-            $transaction = $this->getData();
+            $transaction = $this->getServiceEntity();
             $requestedData["status_change_at"] = Carbon::now();
             $transaction->fill($requestedData);
             $transaction->save();

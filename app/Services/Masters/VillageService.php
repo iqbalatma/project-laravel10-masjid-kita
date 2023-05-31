@@ -80,7 +80,7 @@ class VillageService extends BaseService implements VillageServiceInterface
         try {
             $this->checkData($id);
 
-            $subdistrict = $this->getData();
+            $subdistrict = $this->getServiceEntity();
             $subdistrict->fill($requestedData);
             $subdistrict->save();
 
@@ -108,7 +108,7 @@ class VillageService extends BaseService implements VillageServiceInterface
         try {
             $this->checkData($id);
 
-            $village = $this->getData();
+            $village = $this->getServiceEntity();
             $village->delete();
 
             $response = [

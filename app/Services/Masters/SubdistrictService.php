@@ -80,7 +80,7 @@ class SubdistrictService extends BaseService implements SubdistrictServiceInterf
         try {
             $this->checkData($id);
 
-            $subdistrict = $this->getData();
+            $subdistrict = $this->getServiceEntity();
             $subdistrict->fill($requestedData);
             $subdistrict->save();
 

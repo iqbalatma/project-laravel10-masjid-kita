@@ -102,7 +102,7 @@ class MosqueService extends BaseService implements MosqueServiceInterface
         try {
             $this->checkData($id);
 
-            $subdistrict = $this->getData();
+            $subdistrict = $this->getServiceEntity();
             $subdistrict->fill($requestedData);
             $subdistrict->save();
 

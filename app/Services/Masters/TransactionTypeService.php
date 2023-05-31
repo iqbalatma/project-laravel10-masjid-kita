@@ -98,7 +98,7 @@ class TransactionTypeService extends BaseService implements TransactionTypeServi
         try {
             $this->checkData($id);
 
-            $transactionType = $this->getData();
+            $transactionType = $this->getServiceEntity();
             $transactionType->fill($requestedData);
             $transactionType->save();
 

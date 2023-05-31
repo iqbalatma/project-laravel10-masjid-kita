@@ -60,7 +60,7 @@ class RoleService extends BaseService implements RoleServiceInterface
     {
         try {
             $this->checkData($id);
-            $role = $this->getData();
+            $role = $this->getServiceEntity();
             $permissions = $this->permissionRepo->getAllData();
             $this->setActivePermission($permissions, $role);
 
@@ -140,7 +140,7 @@ class RoleService extends BaseService implements RoleServiceInterface
     {
         try {
             $this->checkData($id);
-            $role = $this->getData();
+            $role = $this->getServiceEntity();
             $role->syncPermissions($requestedData);
 
             $response = [
