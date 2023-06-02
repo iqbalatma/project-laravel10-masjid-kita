@@ -5,7 +5,7 @@
             {{ $cardTitle }}
         </div>
         <div class="card-body">
-            <form class="row g-3" method="POST" action="{{ route('profile.update') }}">
+            <form class="row g-3" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method("PATCH")
                 <div class="col-md-12">
@@ -19,6 +19,10 @@
                 <div class="col-md-12">
                     <label for="address" class="form-label">Address</label>
                     <textarea name="address" id="address" cols="30" rows="10" class="form-control">{{$user->address}}</textarea>
+                </div>
+                <div class="col-md-12">
+                    <label for="profile_image" class="form-label">Profile</label>
+                    <input class="form-control" type="file" id="profile_image" name="profile_image" accept="image/*">
                 </div>
                 <div class="col-12">
                     <x-save-button></x-save-button>

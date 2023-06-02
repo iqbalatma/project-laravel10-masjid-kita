@@ -24,7 +24,15 @@ class UpdateProfileRequest extends FormRequest
         return [
             "name" => "max:128",
             "phone" => "max:32",
-            "address" => "max:1000"
+            "address" => "max:1000",
+            "profile_image" => 'max:1024|image'
+        ];
+    }
+
+    public function messages():array
+    {
+        return [
+            "profile_image.uploaded" => "Your file size is too large. File greater than 1 mb are not allowed"
         ];
     }
 }
