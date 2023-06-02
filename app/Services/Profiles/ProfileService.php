@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\Profiles\ProfileServiceInterface;
 use App\Repositories\UserRepository;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileService extends BaseService implements ProfileServiceInterface
 {
@@ -48,19 +49,27 @@ class ProfileService extends BaseService implements ProfileServiceInterface
      * @param array $requestedData
      * @return array
      */
-    public function updateDataById(array $requestedData):array
+    public function updateDataById(array $requestedData): array
     {
         try {
             $this->checkData(Auth::id());
             $user = $this->getServiceEntity();
 
+//            upload file
+            if (request()->hasFile("profile_image")) {
+                $profile = request()->file("profile_image");
+                $uploaded = Storage::putFile("profiles", $profile);
+                $requestedData["profile_image"] = $uploaded;
+            }
+
+//            save data
             $user->fill($requestedData);
             $user->save();
 
             $response = [
                 "success" => true
             ];
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = getDefaultErrorResponse($e);
         }
 

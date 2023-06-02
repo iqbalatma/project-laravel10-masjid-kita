@@ -48,6 +48,8 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 });
 
 Route::middleware("auth")->group(function () {
+    Route::get("images/{path}", \App\Http\Controllers\ImageController::class)->name("images");
+
     Route::prefix("profile")->name("profile.")->controller(\App\Http\Controllers\Profiles\ProfileController::class)->group(function (){
         Route::get("/", 'edit')->name("edit");
         Route::patch("/", 'update')->name("update");
