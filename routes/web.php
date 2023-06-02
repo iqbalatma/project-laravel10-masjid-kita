@@ -39,11 +39,7 @@ use Illuminate\Support\Str;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/tes', function () {
-    echo "tes";
-});
+})->name("dashboard");
 
 Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(function () {
     Route::get("/", "login")->name("login");
@@ -52,6 +48,11 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 });
 
 Route::middleware("auth")->group(function () {
+    Route::prefix("profile")->name("profile.")->controller(\App\Http\Controllers\Profiles\ProfileController::class)->group(function (){
+        Route::get("/", 'edit')->name("edit");
+        Route::patch("/", 'update')->name("update");
+    });
+
     Route::prefix("user-managements")->name("user.managements.")->group(function () {
         // USER MANAGEMENT
         Route::prefix("/users")->name("users.")->controller(UserManagementController::class)->group(function () {

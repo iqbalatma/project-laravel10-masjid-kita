@@ -26,3 +26,15 @@ function formatToRupiah(float $number): string
 {
     return "Rp " . number_format($number, 2, ",", ".");
 }
+
+/**
+ * @param Exception $e
+ * @return array
+ */
+function getDefaultErrorResponse(Exception $e): array
+{
+    return [
+        "success" => false,
+        "message" => config('app.env') != 'production' ? $e->getMessage() : 'Something went wrong'
+    ];
+}
