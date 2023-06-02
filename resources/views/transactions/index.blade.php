@@ -20,9 +20,6 @@
                         <th scope="col">Perubahan Status Oleh</th>
                         <th scope="col">Tanggal Perubahan Status</th>
                         <th scope="col">Tanggal Transaksi</th>
-                        @if(request()->route('type')=='submissions')
-                        <th scope="col">Action</th>
-                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -42,16 +39,6 @@
                         <td>{{ $transaction->status_changer?->name ?? "-" }}</td>
                         <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
-                        @if(request()->route('type')=='submissions')
-                        <td>
-                            @can($transactionPermissions::APPROVAL)
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success btn-approval" data-bs-toggle="modal" data-bs-target="#modal-approval" data-transaction="{{ $transaction }}">
-                                <i class="fa-solid fa-pen-to-square"></i> Persetujuan
-                            </button>
-                            @endcan
-                        </td>
-                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -60,6 +47,4 @@
             @endif
         </div>
     </div>
-
-
 </x-dashboard.layout>
