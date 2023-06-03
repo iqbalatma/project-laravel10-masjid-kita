@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">{{ $cardTitle }}</h4>
 
-            @can($transactionTypePermissions::STORE)
+            @can($accessPermissions["TRANSACTION_TYPE_STORE"])
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -24,7 +24,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Terakhir Diperbaharui</th>
-                        @canany([$transactionTypePermissions::UPDATE,$transactionTypePermissions::DESTROY])
+                        @canany([$accessPermissions["TRANSACTION_TYPE_UPDATE"],$accessPermissions["TRANSACTION_TYPE_DESTROY"]])
                         <th scope="col">Aksi</th>
                         @endcanany
                     </tr>
@@ -35,15 +35,15 @@
                         <td>{{ $transactionTypes->firstItem() + $key }}</td>
                         <td>{{ ucwords($type->name) }}</td>
                         <td>{{ $type->updated_at }}</td>
-                        @canany([$transactionTypePermissions::UPDATE,$transactionTypePermissions::DESTROY])
+                        @canany([$accessPermissions["TRANSACTION_TYPE_UPDATE"],$accessPermissions["TRANSACTION_TYPE_DESTROY"]])
                         <td>
-                            @can($districtPermissions::UPDATE)
+                            @can($accessPermissions["TRANSACTION_TYPE_UPDATE"])
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-transaction-type="{{ $type }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
 
-                            @can($transactionTypePermissions::DESTROY)
+                            @can($accessPermissions["TRANSACTION_TYPE_DESTROY"])
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $type->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    @can($transactionTypePermissions::UPDATE)
+    @can($accessPermissions["TRANSACTION_TYPE_UPDATE"])
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -89,7 +89,7 @@
     @endcan
 
 
-    @can($transactionTypePermissions::STORE)
+    @can($accessPermissions["TRANSACTION_TYPE_STORE"])
     <!-- Modal Add New Transaction Type-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -116,7 +116,7 @@
     </div>
     @endcan
 
-    @can($transactionTypePermissions::DESTROY)
+    @can($accessPermissions["TRANSACTION_TYPE_DESTROY"])
     <form id="form-delete" action="{{ route('masters.transaction.types.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")

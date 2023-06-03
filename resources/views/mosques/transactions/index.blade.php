@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">{{ $cardTitle }}</h4>
-            @can($mosqueTransactionPermissions::STORE)
+            @can($accessPermissions["MOSQUE_TRANSACTION_STORE"])
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -29,7 +29,7 @@
                         <th scope="col">Tanggal Persetujuan</th>
                         <th scope="col">Tanggal Transaksi</th>
                         @if(request()->route('type')=='submissions')
-                        @can($mosqueTransactionPermissions::APPROVAL)
+                        @can($accessPermissions["MOSQUE_TRANSACTION_APPROVAL"])
                         <th scope="col">Action</th>
                         @endcan
                         @endif
@@ -53,7 +53,7 @@
                         <td>{{ $transaction->status_change_at }}</td>
                         <td>{{ $transaction->created_at }}</td>
                         @if(request()->route('type')=='submissions')
-                        @can($mosqueTransactionPermissions::APPROVAL)
+                        @can($accessPermissions["MOSQUE_TRANSACTION_APPROVAL"])
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success btn-approval" data-bs-toggle="modal" data-bs-target="#modal-approval" data-transaction="{{ $transaction }}">
@@ -73,7 +73,7 @@
     </div>
 
 
-    @can($mosqueTransactionPermissions::STORE)
+    @can($accessPermissions["MOSQUE_TRANSACTION_STORE"])
     <!-- Modal Add New -->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -121,7 +121,7 @@
     </div>
     @endcan
 
-    @can($mosqueTransactionPermissions::APPROVAL)
+    @can($accessPermissions["MOSQUE_TRANSACTION_APPROVAL"])
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-approval" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

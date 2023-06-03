@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">{{ $cardTitle }}</h4>
 
-            @can($mosquePermissions::STORE)
+            @can($accessPermissions["MOSQUE_STORE"])
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -33,7 +33,7 @@
                         <th scope="col">Zakat</th>
                         <th scope="col">Hutang</th>
                         <th scope="col">Terakhir Diperbaharui</th>
-                        @canany([$mosquePermissions::UPDATE,$mosquePermissions::DESTROY])
+                        @canany([$accessPermissions["MOSQUE_UPDATE"],$accessPermissions["MOSQUE_DESTROY"]])
                         <th scope="col">Aksi</th>
                         @endcanany
                     </tr>
@@ -53,22 +53,21 @@
                         <td>{{ formatToRupiah($mosque->zakat) }}</td>
                         <td>{{ formatToRupiah($mosque->debt) }}</td>
                         <td>{{ $mosque->updated_at }}</td>
-                        @canany([$mosquePermissions::UPDATE,$mosquePermissions::DESTROY])
+                        @canany([$accessPermissions["MOSQUE_UPDATE"],$accessPermissions["MOSQUE_DESTROY"]])
                         <td>
-                            @can($districtPermissions::UPDATE)
+                            @can($accessPermissions["MOSQUE_UPDATE"])
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-mosque="{{ $mosque }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
 
-                            @can($mosquePermissions::DESTROY)
+                            @can($accessPermissions["MOSQUE_DESTROY"])
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $mosque->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
                             @endcan
                         </td>
                         @endcanany
-
                     </tr>
                     @endforeach
                 </tbody>
@@ -78,7 +77,7 @@
         </div>
     </div>
 
-    @can($mosquePermissions::UPDATE)
+    @can($accessPermissions["MOSQUE_UPDATE"])
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -124,7 +123,7 @@
     @endcan
 
 
-    @can($mosquePermissions::STORE)
+    @can($accessPermissions["MOSQUE_STORE"])
     <!-- Modal Add New Mosque-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -168,7 +167,7 @@
     </div>
     @endcan
 
-    @can($mosquePermissions::DESTROY)
+    @can($accessPermissions["MOSQUE_DESTROY"])
     <form id="form-delete" action="{{ route('masters.mosques.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")

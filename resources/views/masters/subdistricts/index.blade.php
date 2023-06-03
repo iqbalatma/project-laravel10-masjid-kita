@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">Data All Subdistrict</h4>
 
-            @can($subdistrictPermissions::STORE)
+            @can($accessPermissions["SUBDISTRICT_STORE"])
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -26,7 +26,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Kabupaten</th>
                         <th scope="col">Created At</th>
-                        @canany([$subdistrictPermissions::UPDATE, $subdistrictPermissions::DESTROY])
+                        @canany([$accessPermissions["SUBDISTRICT_UPDATE"], $accessPermissions["SUBDISTRICT_DESTROY"]])
                         <th scope="col">Action</th>
                         @endcanany
                     </tr>
@@ -39,16 +39,16 @@
                         <td>{{ ucwords($subdistrict->name) }}</td>
                         <td>{{ ucwords($subdistrict->district?->name ?? "-") }}</td>
                         <td>{{ $subdistrict->created_at }}</td>
-                        @canany([$subdistrictPermissions::UPDATE, $subdistrictPermissions::DESTROY])
+                        @canany([$accessPermissions["SUBDISTRICT_UPDATE"], $accessPermissions["SUBDISTRICT_DESTROY"]])
                         <td>
-                            @can($subdistrictPermissions::UPDATE)
+                            @can($accessPermissions["SUBDISTRICT_UPDATE"])
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-subdistrict="{{ $subdistrict }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
 
-                            @can($subdistrictPermissions::DESTROY)
+                            @can($accessPermissions["SUBDISTRICT_DESTROY"])
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $subdistrict->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    @can($subdistrictPermissions::UPDATE)
+    @can($accessPermissions["SUBDISTRICT_UPDATE"])
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -106,7 +106,7 @@
     </div>
     @endcan
 
-    @can($subdistrictPermissions::STORE)
+    @can($accessPermissions["SUBDISTRICT_STORE"])
     <!-- Modal Add New Subdistrict-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -146,7 +146,7 @@
     </div>
     @endcan
 
-    @can($subdistrictPermissions::DESTROY)
+    @can($accessPermissions["SUBDISTRICT_DESTROY"])
     <form id="form-delete" action="{{ route('masters.subdistricts.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")

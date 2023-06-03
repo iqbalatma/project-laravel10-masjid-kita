@@ -5,6 +5,7 @@ let css = ["resources/css/app.css"];
 
 let js = [
     "resources/js/app.js",
+    "resources/js/pages/dashboard/index.js",
     "resources/js/pages/masters/districts/index.js",
     "resources/js/pages/masters/subdistricts/index.js",
     "resources/js/pages/masters/villages/index.js",

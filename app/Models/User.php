@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,6 +60,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
+ * @property string|null $profile_image
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Mosque> $mosques
+ * @property-read int|null $mosques_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereProfileImage($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -100,6 +109,9 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * @return Attribute
+     */
     protected function password(): Attribute
     {
         return Attribute::make(
@@ -107,7 +119,11 @@ class User extends Authenticatable
         );
     }
 
-    public function mosque()
+
+    /**
+     * @return BelongsToMany
+     */
+    public function mosques():BelongsToMany
     {
         return $this->belongsToMany(Mosque::class);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\PermissionEnum;
 use App\Statics\Permissions\DistrictPermission;
 use App\Statics\Permissions\MosquePermission;
 use App\Statics\Permissions\MosqueTransactionPermission;
@@ -40,16 +41,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');
         viewShare([
-            "permissionPermissions" => PermissionPermission::class,
-            "rolePermissions" => RolePermission::class,
-            "userManagementPermissions" => UserManagementPermission::class,
-            "districtPermissions" => DistrictPermission::class,
-            "subdistrictPermissions" => SubdistrictPermission::class,
-            "villagePermissions" => VillagePermission::class,
-            "mosquePermissions" => MosquePermission::class,
-            "transactionPermissions" => TransactionPermission::class,
-            "transactionTypePermissions" => TransactionTypePermission::class,
-            "mosqueTransactionPermissions" => MosqueTransactionPermission::class,
+            "accessPermissions" => PermissionEnum::casesName(),
         ]);
     }
 }

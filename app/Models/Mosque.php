@@ -48,6 +48,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque whereZakat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $user
  * @mixin \Eloquent
  */
 class Mosque extends Model

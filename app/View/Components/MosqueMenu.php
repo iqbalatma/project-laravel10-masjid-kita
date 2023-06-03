@@ -15,7 +15,7 @@ class MosqueMenu extends Component
      */
     public function __construct()
     {
-        $this->mosqueMenus = Auth::user()?->mosque;
+        $this->mosqueMenus = Auth::user()?->mosques;
     }
 
     /**

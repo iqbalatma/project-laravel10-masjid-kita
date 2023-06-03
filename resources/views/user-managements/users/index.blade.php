@@ -5,7 +5,7 @@
             {{ $cardTitle }}
         </div>
         <div class="card-body">
-            @can($userManagementPermissions::STORE)
+            @can($accessPermissions["USER_MANAGEMENT_STORE"])
             {{-- Button Add New User --}}
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
                 <i class="fa-solid fa-plus"></i>
@@ -30,7 +30,7 @@
                         <th>Roles</th>
                         <th>Email Verified At</th>
                         <th>Last Updated Time</th>
-                        @canany([$userManagementPermissions::UPDATE,$userManagementPermissions::CHANGE_STATUS_ACTIVE])
+                        @canany([$accessPermissions["USER_MANAGEMENT_UPDATE"],$accessPermissions["USER_MANAGEMENT_CHANGE_STATUS_ACTIVE"]])
                         <th>Action</th>
                         @endcanany
                     </thead>
@@ -56,17 +56,17 @@
                                 @endif
                             </td>
                             <td>{{ $user->updated_at }}</td>
-                            @canany([$userManagementPermissions::UPDATE,$userManagementPermissions::CHANGE_STATUS_ACTIVE])
+                            @canany([$accessPermissions["USER_MANAGEMENT_UPDATE"],$accessPermissions["USER_MANAGEMENT_CHANGE_STATUS_ACTIVE"]])
                             <td>
                                 <div class="d-grid gap-2 d-md-flex">
-                                    @can($userManagementPermissions::UPDATE)
+                                    @can($accessPermissions["USER_MANAGEMENT_UPDATE"])
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-success btn-sm btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-user="{{ $user }}">
                                         <i class="fa-solid fa-pen-to-square"></i> Sunting
                                     </button>
                                     @endcan
 
-                                    @can($userManagementPermissions::CHANGE_STATUS_ACTIVE)
+                                    @can($accessPermissions["USER_MANAGEMENT_CHANGE_STATUS_ACTIVE"])
                                     <form action="{{ route('user.managements.users.change.status.active', $user->id) }}" method="POST">
                                         @csrf
                                         @method("PUT")
@@ -94,7 +94,7 @@
         </div>
     </div>
 
-    @can($userManagementPermissions::STORE)
+    @can($accessPermissions["USER_MANAGEMENT_STORE"])
     <!-- Modal Add New Users -->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -150,7 +150,7 @@
     </div>
     @endcan
 
-    @can($userManagementPermissions::UPDATE)
+    @can($accessPermissions["USER_MANAGEMENT_UPDATE"])
     <!-- Modal Edit Users -->
     <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

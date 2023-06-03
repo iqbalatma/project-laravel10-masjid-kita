@@ -3,7 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">Data All Villages</h4>
 
-            @can($villagePermissions::STORE)
+            @can($accessPermission["VILLAGE_STORE"])
             <!-- Button Add New Data  -->
             <div class="button-group">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -26,7 +26,7 @@
                         <th>Kode Post</th>
                         <th>Kecamatan</th>
                         <th>Terakhir Diperbaharui</th>
-                        @canany([$villagePermissions::UPDATE, $villagePermissions::DESTROY])
+                        @canany([$accessPermission["VILLAGE_UPDATE"], $accessPermission["VILLAGE_DESTROY"]])
                         <th>Action</th>
                         @endcanany
                     </tr>
@@ -39,14 +39,14 @@
                         <td class="text-bold-500">{{ $village->postcode }}</td>
                         <td class="text-bold-500">{{ ucwords($village->subdistrict?->name)??"-" }}</td>
                         <td class="text-bold-500">{{ $village->updated_at }}</td>
-                        @canany([$villagePermissions::UPDATE, $villagePermissions::DESTROY])
+                        @canany([$accessPermission["VILLAGE_UPDATE"], $accessPermission["VILLAGE_DESTROY"]])
                         <td align="left">
-                            @can($villagePermissions::UPDATE)
+                            @can($accessPermission["VILLAGE_UPDATE"])
                             <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-village="{{ $village }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
-                            @can($villagePermissions::DESTROY)
+                            @can($accessPermission["VILLAGE_DESTROY"])
                             <button type="button" class="btn btn-danger btn-delete" style="margin-left: 10px" data-id="{{ $village->id }}">
                                 <i class="fa-solid fa-trash-can"></i> Delete
                             </button>
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    @can($villagePermissions::STORE)
+    @can($accessPermission["VILLAGE_STORE"])
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -101,7 +101,7 @@
     </div>
     @endcan
 
-    @can($villagePermissions::UPDATE)
+    @can($accessPermission["VILLAGE_UPDATE"])
     <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -141,7 +141,7 @@
     </div>
     @endcan
 
-    @can($villagePermissions::DESTROY)
+    @can($accessPermission["VILLAGE_DESTROY"])
     <form id="form-delete" action="{{ route('masters.villages.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")

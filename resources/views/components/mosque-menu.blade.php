@@ -1,4 +1,4 @@
-@canany([$mosqueTransactionPermissions::INDEX, $mosqueTransactionPermissions::APPROVAL])
+@canany([$accessPermissions["MOSQUE_TRANSACTION_INDEX"], $accessPermissions["MOSQUE_TRANSACTION_APPROVAL"]])
 <li class="sidebar-title">Transaksi Masjid</li>
 
 @forelse ($mosqueMenus as $key => $mosque)
@@ -8,13 +8,13 @@
         <span>{{ $mosque->name }}</span>
     </a>
     <ul class="submenu ">
-        @can($transactionPermissions::INDEX)
+        @can($accessPermissions["MOSQUE_TRANSACTION_INDEX"])
         <li class="submenu-item ">
             <a href="{{ route('mosque.transactions.index',['mosque_id' => $mosque->id, 'type'=> 'all']) }}">Transaksi</a>
         </li>
         @endcan
 
-        @can($mosqueTransactionPermissions::APPROVAL)
+        @can($accessPermissions["MOSQUE_TRANSACTION_APPROVAL"])
         <li class="submenu-item">
             <a href="{{ route('mosque.transactions.index',['mosque_id' => $mosque->id, 'type'=> 'submissions']) }}">Pengajuan</a>
         </li>

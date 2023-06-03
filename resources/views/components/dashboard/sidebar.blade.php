@@ -41,97 +41,97 @@
                     </a>
                 </li>
 
-                @canany([$districtPermissions::INDEX, $subdistrictPermissions::INDEX, $villagePermissions::INDEX, $mosquePermissions::INDEX])
-                <li class="sidebar-title">Data Masters</li>
-                @can($districtPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('masters.districts.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
-                        <span>Kabupaten</span>
-                    </a>
-                </li>
-                @endcan
-                @can($subdistrictPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('masters.subdistricts.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
-                        <span>Kecamatan</span>
-                    </a>
-                </li>
-                @endcan
-                @can($villagePermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('masters.villages.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-list"></i>
-                        <span>Desa/Kelurahan</span>
-                    </a>
-                </li>
-                @endcan
-                @can($mosquePermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('masters.mosques.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-mosque"></i>
-                        <span>Masjid</span>
-                    </a>
-                </li>
-                @endcan
-                @can($transactionTypePermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('masters.transaction.types.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-money-bills"></i>
-                        <span>Transaction Type</span>
-                    </a>
-                </li>
-                @endcan
+                @canany([$accessPermissions["DISTRICT_INDEX"],$accessPermissions["SUBDISTRICT_INDEX"],$accessPermissions["VILLAGE_INDEX"], $accessPermissions["MOSQUE_INDEX"], $accessPermissions["TRANSACTION_TYPE_INDEX"]])
+                    <li class="sidebar-title">Data Masters</li>
+                    @can($accessPermissions["DISTRICT_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('masters.districts.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-list"></i>
+                                <span>Kabupaten</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions["SUBDISTRICT_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('masters.subdistricts.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-list"></i>
+                                <span>Kecamatan</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions["VILLAGE_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('masters.villages.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-list"></i>
+                                <span>Desa/Kelurahan</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions["MOSQUE_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('masters.mosques.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-mosque"></i>
+                                <span>Masjid</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions["TRANSACTION_TYPE_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('masters.transaction.types.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-money-bills"></i>
+                                <span>Transaction Type</span>
+                            </a>
+                        </li>
+                    @endcan
                 @endcanany
 
 
-                @canany([$transactionPermissions::INDEX])
-                <li class="sidebar-title">Data Transaksi</li>
+                @canany([$accessPermissions["TRANSACTION_INDEX"]])
+                    <li class="sidebar-title">Data Transaksi</li>
 
-                @can($transactionPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('transactions.index', 'all') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-right-left"></i>
-                        <span>Transaksi</span>
-                    </a>
-                </li>
-                @endcan
+                    @can($accessPermissions["TRANSACTION_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('transactions.index', 'all') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-right-left"></i>
+                                <span>Transaksi</span>
+                            </a>
+                        </li>
+                    @endcan
 
-                @can($transactionPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('transactions.index', 'submissions') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-right-left"></i>
-                        <span>Pengajuan Transaksi</span>
-                    </a>
-                </li>
-                @endcan
+                    @can($accessPermissions["TRANSACTION_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('transactions.index', 'submissions') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-right-left"></i>
+                                <span>Pengajuan Transaksi</span>
+                            </a>
+                        </li>
+                    @endcan
 
                 @endcanany
+
                 <x-mosque-menu></x-mosque-menu>
 
-
-                @canany([$userManagementPermissions::INDEX, $rolePermissions::INDEX, $permissionPermissions::INDEX])
-                <li class="sidebar-title">User Managements</li>
-                @can($userManagementPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('user.managements.users.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-users-line"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
-                @endcan
-                @can($rolePermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('user.managements.roles.index') }}" class='sidebar-link'>
-                        <i class="fa-solid fa-user-gear"></i>
-                        <span>Peran</span>
-                    </a>
-                </li>
-                @endcan
-                @can($permissionPermissions::INDEX)
-                <li class="sidebar-item">
-                    <a href="{{ route('user.managements.permissions.index') }}" class='sidebar-link'>
+                @canany([$accessPermissions["USER_MANAGEMENT_INDEX"],  $accessPermissions["ROLE_INDEX"], $accessPermissions["PERMISSION_INDEX"]])
+                    <li class="sidebar-title">User Managements</li>
+                    @can($accessPermissions["USER_MANAGEMENT_INDEX"])
+                        <li class="sidebar-item">
+                            <a href="{{ route('user.managements.users.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-users-line"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions['ROLE_INDEX'])
+                        <li class="sidebar-item">
+                            <a href="{{ route('user.managements.roles.index') }}" class='sidebar-link'>
+                                <i class="fa-solid fa-user-gear"></i>
+                                <span>Peran</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can($accessPermissions['PERMISSION_INDEX'])
+                        <li class="sidebar-item">
+                            <a href="{{ route('user.managements.permissions.index') }}" class='sidebar-link'>
                         <i class="fa-solid fa-user-lock"></i>
                         <span>Izin Akses</span>
                     </a>
