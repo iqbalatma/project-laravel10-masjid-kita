@@ -39,7 +39,7 @@
                     @foreach ($transactions as $key => $transaction)
                     <tr>
                         <td>{{ $transactions->firstItem() + $key }}</td>
-                        <td>{{ $transaction->mosque->name }}</td>
+                        <td>{{ $transaction->mosque?->name }}</td>
                         <td>{{ formatToRupiah($transaction->amount) }}</td>
                         <td>{{ ucwords($transaction->transaction_type->name) }}</td>
                         <td>

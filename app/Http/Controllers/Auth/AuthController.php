@@ -52,6 +52,6 @@ class AuthController extends Controller
     public function logout(AuthService $service, Request $request): RedirectResponse
     {
         $service->logout($request);
-        return redirect('/');
+        return redirect()->route("auth.login");
     }
 }

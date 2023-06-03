@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\StatusTransactionEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -57,7 +58,11 @@ class Transaction extends Model
         "description", "amount", "transaction_type_id", "method", "mosque_id", "user_id", "status_changed_by", "status_change_at", "status"
     ];
 
-    public function mosques()
+
+    /**
+     * @return BelongsTo
+     */
+    public function mosque():BelongsTo
     {
         return $this->belongsTo(Mosque::class);
     }

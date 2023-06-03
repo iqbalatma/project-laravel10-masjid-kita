@@ -4,7 +4,6 @@ namespace App\Services\Mosques;
 
 use App\Contracts\Abstracts\Mosques\BaseMosqueTransactionService;
 use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
-use App\Models\TransactionType;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionTypeRepository;
 use Carbon\Carbon;
@@ -55,7 +54,6 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             $dataResponse["description"] = "Semua data pengajuan transaksi yang belum di approved";
             $dataResponse["transactions"] =  $this->repository->with(["mosque"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
         }
-
         return $dataResponse;
     }
 
