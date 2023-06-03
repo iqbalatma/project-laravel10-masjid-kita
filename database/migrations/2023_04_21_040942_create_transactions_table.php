@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum("method", ["income", "expense"]);
             $table->unsignedBigInteger("mosque_id");
             $table->unsignedBigInteger("user_id");
-            $table->enum("status", ["pending", "approved", "rejected"])->default("pending");
+            $table->enum("status",\App\Enums\StatusTransactionEnum::cases())->default("pending");
             $table->unsignedBigInteger("status_changed_by")->nullable();
             $table->timestamp("status_change_at")->useCurrent();
             $table->timestamps();

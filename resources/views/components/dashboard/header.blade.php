@@ -4,7 +4,6 @@
             <a href="#" class="burger-btn d-block">
                 <i class="bi bi-justify fs-3"></i>
             </a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -55,22 +54,6 @@
                         </ul>
                     @endif
                 </div>
-
-                {{--                <a href="{{route("profile.edit")}}">--}}
-                {{--                    <div class="user-menu d-flex">--}}
-                {{--                        <div class="user-name text-end me-3">--}}
-                {{--                            <h6 class="mb-0 text-gray-600">{{ \Illuminate\Support\Facades\Auth::user()->name ?? "Guest" }}</h6>--}}
-                {{--                        </div>--}}
-                {{--                        @if(\Illuminate\Support\Facades\Auth::check())--}}
-                {{--                            <div class="user-img d-flex align-items-center">--}}
-                {{--                                <div class="avatar avatar-md">--}}
-                {{--                                    <img--}}
-                {{--                                        src="{{ \Illuminate\Support\Facades\URL::to("/images/" . str_replace("/", "_", \Illuminate\Support\Facades\Auth::user()->profile_image)) }}">--}}
-                {{--                                </div>--}}
-                {{--                            </div>--}}
-                {{--                        @endif--}}
-                {{--                    </div>--}}
-                {{--                </a>--}}
             </div>
         </div>
     </nav>

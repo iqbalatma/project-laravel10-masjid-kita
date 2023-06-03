@@ -1,7 +1,7 @@
 <x-dashboard.layout>
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">{{$cardTitle}}</h4>
+            <h4 class="card-title" id="cardtitle">{{$cardTitle}}</h4>
         </div>
         <div class="card-body">
             <div id="chart">

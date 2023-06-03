@@ -33,13 +33,22 @@ Route::prefix("auth")->name("auth.")->controller(AuthController::class)->group(f
 });
 
 Route::middleware("auth")->group(function () {
+
+    Route::prefix("/ajax")->name("ajax.")->group(function (){
+        Route::get("/dashboard", \App\Http\Controllers\AJAX\DashboardController::class)->name("dashboard");
+    });
+
     Route::get("images/{path}", \App\Http\Controllers\ImageController::class)->name("images");
 
+
+//    PROFILE
     Route::prefix("profile")->name("profile.")->controller(\App\Http\Controllers\Profiles\ProfileController::class)->group(function (){
         Route::get("/", 'edit')->name("edit");
         Route::patch("/", 'update')->name("update");
     });
 
+
+//    USER MANAGEMENTS
     Route::prefix("user-managements")->name("user.managements.")->group(function () {
         // USER MANAGEMENT
         Route::prefix("/users")->name("users.")->controller(UserManagementController::class)->group(function () {
@@ -63,6 +72,7 @@ Route::middleware("auth")->group(function () {
         });
     });
 
+//    MASTERS
     Route::prefix("masters")->name("masters.")->group(function () {
         // TRANSACTION TYPE
         Route::prefix("transaction-types")->name("transaction.types.")->controller(TransactionTypeController::class)->group(function () {
@@ -108,6 +118,7 @@ Route::middleware("auth")->group(function () {
         });
     });
 
+//    TRANSACTIONS
     Route::prefix("transactions")->name("transactions.")->group(function () {
         Route::controller(TransactionController::class)->group(function () {
             Route::get("/{type}", "index")->name("index")->middleware("permission:" . \App\Enums\PermissionEnum::TRANSACTION_INDEX->value);
@@ -115,6 +126,7 @@ Route::middleware("auth")->group(function () {
         });
     });
 
+//    MOSQUES
     Route::prefix("mosques/{mosque_id}")->name("mosque.")->group(function () {
         Route::prefix("transactions")->name("transactions.")->controller(MosqueTransactionController::class)->group(function () {
             Route::get("/{type}", "index")->name("index")->middleware("permission:" . \App\Enums\PermissionEnum::MOSQUE_TRANSACTION_INDEX->value);
