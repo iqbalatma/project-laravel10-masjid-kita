@@ -83,7 +83,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-add" class="row g-3" method="POST" action="{{ route('mosque.transactions.store', request()->route('mosque_id')) }}">
+                    <form id="form-add" class="row g-3" method="POST" action="{{ route('mosque.transactions.store', request()->route('mosque_id')) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
                             <label for="add-amount" class="form-label">Jumlah Transaksi</label>
@@ -109,6 +109,10 @@
                         <div class="col-md-12">
                             <label for="add-description" class="form-label">Deskripsi</label>
                             <textarea class="form-control" id="add-description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="transaction_images[]" class="form-label">Bukti Transaksi</label>
+                            <input class="form-control" type="file" id="transaction_images[]" name="transaction_images[]" multiple>
                         </div>
                     </form>
                 </div>

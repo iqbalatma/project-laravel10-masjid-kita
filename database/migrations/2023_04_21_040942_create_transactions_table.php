@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        $statusTransactions = \App\Enums\StatusTransactionEnum::cases();
+        $statusTransactions = collect($statusTransactions)->map(function ($item) {
+            return $item->value;
+        })->toArray();
+        Schema::create('transactions', function (Blueprint $table) use($statusTransactions){
             $table->id();
             $table->text("description")->default("-");
             $table->decimal("amount", 14, 2)->default(0);
@@ -19,7 +23,7 @@ return new class extends Migration
             $table->enum("method", ["income", "expense"]);
             $table->unsignedBigInteger("mosque_id");
             $table->unsignedBigInteger("user_id");
-            $table->enum("status",\App\Enums\StatusTransactionEnum::cases())->default("pending");
+            $table->enum("status", $statusTransactions)->default("pending");
             $table->unsignedBigInteger("status_changed_by")->nullable();
             $table->timestamp("status_change_at")->useCurrent();
             $table->timestamps();

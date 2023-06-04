@@ -4,20 +4,26 @@ namespace App\Services\Mosques;
 
 use App\Contracts\Abstracts\Mosques\BaseMosqueTransactionService;
 use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
+use App\Repositories\TransactionImageRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionTypeRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MosqueTransactionService extends BaseMosqueTransactionService implements MosqueTransactionServiceInterface
 {
     protected $repository;
+    protected $transactionImageRepo;
     private TransactionTypeRepository $transactionTypeRepo;
+
     public function __construct()
     {
         parent::__construct();
         $this->repository = new TransactionRepository();
+        $this->transactionImageRepo = new TransactionImageRepository();
         $this->transactionTypeRepo = new TransactionTypeRepository();
         $this->breadcumbs = [
             "dashboard" => "Dashboard",
@@ -52,7 +58,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             $dataResponse["title"] = "Pengajuan Transaksi Masjid $mosque->name";
             $dataResponse["cardTitle"] = "Pengajuan Transaksi Masjid";
             $dataResponse["description"] = "Semua data pengajuan transaksi yang belum di approved";
-            $dataResponse["transactions"] =  $this->repository->with(["mosque"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
+            $dataResponse["transactions"] = $this->repository->with(["mosque"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
         }
         return $dataResponse;
     }
@@ -69,18 +75,28 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
     {
         $this->checkAccess($mosqueId);
         try {
+            DB::beginTransaction();
             $requestedData["mosque_id"] = $mosqueId;
             $requestedData["user_id"] = Auth::id();
-            $this->repository->addNewData($requestedData);
+
+            $transaction = $this->repository->addNewData($requestedData);
+
+            foreach (request()->file("transaction_images") as $uploadedFile) {
+                $uploaded = Storage::putFile("transactions-images", $uploadedFile);
+                $this->transactionImageRepo->addNewData([
+                    "image" => $uploaded,
+                    "transaction_id" => $transaction->id
+                ]);
+            }
 
             $response = [
                 "success" => true,
             ];
+
+            DB::commit();
         } catch (Exception $e) {
-            $response = [
-                "success" => false,
-                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
-            ];
+            DB::rollBack();
+            $response = getDefaultErrorResponse();
         }
 
         return $response;
@@ -108,10 +124,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
                 "success" => true,
             ];
         } catch (Exception $e) {
-            $response = [
-                "success" => false,
-                "message" => config('app.env') != 'production' ?  $e->getMessage() : 'Something went wrong'
-            ];
+            $response = getDefaultErrorResponse();
         }
 
         return $response;

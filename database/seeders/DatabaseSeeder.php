@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MosqueSeeder::class,
             TransactionTypeSeeder::class,
-            TransactionSeeder::class
+            TransactionSeeder::class,
+            TransactionImageSeeder::class
         ]);
     }
 }

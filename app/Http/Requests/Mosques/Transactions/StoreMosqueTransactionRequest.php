@@ -25,7 +25,16 @@ class StoreMosqueTransactionRequest extends FormRequest
             "description" => "",
             "amount" => "numeric|required",
             "transaction_type_id" => "required|numeric",
-            "method" => "required|in:income,expense"
+            "method" => "required|in:income,expense",
+            "transaction_images" => "",
+            "transaction_images.*" => "max:1024|image",
+        ];
+    }
+
+    public function messages():array
+    {
+        return [
+            "transaction_images.*.uploaded" => "Your file size is too large. File greater than 1 mb are not allowed"
         ];
     }
 }
