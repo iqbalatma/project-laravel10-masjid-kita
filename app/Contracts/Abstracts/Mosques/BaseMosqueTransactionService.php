@@ -40,15 +40,4 @@ abstract class BaseMosqueTransactionService extends BaseService
         return $this->mosque;
     }
 
-    public function checkAccess(int $mosqueId)
-    {
-        $mosque = $this->mosqueRepo->getDataById($mosqueId);
-        if (!$mosque) {
-            abort(JsonResponse::HTTP_NOT_FOUND);
-        }
-        $this->setMosque($mosque);
-        if (!$mosque->user->contains(Auth::id())) {
-            abort(JsonResponse::HTTP_FORBIDDEN);
-        }
-    }
 }

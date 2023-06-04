@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -48,7 +49,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque whereZakat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Mosque withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $user
  * @mixin \Eloquent
  */
 class Mosque extends Model
@@ -66,7 +66,11 @@ class Mosque extends Model
         "debt",
     ];
 
-    public function user()
+
+    /**
+     * @return BelongsToMany
+     */
+    public function users():BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class MosqueTransactionService extends BaseMosqueTransactionService implements MosqueTransactionServiceInterface
@@ -74,7 +75,9 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
      */
     public function addNewData(array $requestedData, int $mosqueId): array
     {
-        $this->checkAccess($mosqueId);
+        $mosque = $this->mosqueRepo->getDataById($mosqueId);
+        Gate::authorize("store", $mosque);
+
         try {
             DB::beginTransaction();
             $requestedData["mosque_id"] = $mosqueId;
@@ -116,7 +119,8 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
      */
     public function approval(int $mosqueId, int $id, array $requestedData): array
     {
-        $this->checkAccess($mosqueId);
+        $mosque = $this->mosqueRepo->getDataById($mosqueId);
+        Gate::authorize("update", $mosque);
         try {
             $this->checkData($id);
             $transaction = $this->getServiceEntity();
