@@ -53,12 +53,12 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             $dataResponse["title"] = "Semua Data Transaksi Majsid $mosque->name";
             $dataResponse["cardTitle"] = "Transaksi Masjid";
             $dataResponse["description"] = "Semua data transaksi pada masjid";
-            $dataResponse["transactions"] = $this->repository->with(["mosque"])->orderBy(["status_change_at"], "status_change_at", "DESC")->getDataApprovedTransactionPaginated($mosqueId);
+            $dataResponse["transactions"] = $this->repository->with(["mosque", "transaction_images"])->orderBy(["status_change_at"], "status_change_at", "DESC")->getDataApprovedTransactionPaginated($mosqueId);
         } elseif ($type == "submissions") {
             $dataResponse["title"] = "Pengajuan Transaksi Masjid $mosque->name";
             $dataResponse["cardTitle"] = "Pengajuan Transaksi Masjid";
             $dataResponse["description"] = "Semua data pengajuan transaksi yang belum di approved";
-            $dataResponse["transactions"] = $this->repository->with(["mosque"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
+            $dataResponse["transactions"] = $this->repository->with(["mosque", "transaction_images"])->orderBy(["created_at"], "created_at", "DESC")->getDataTransactionSubmissionPaginated($mosqueId);
         }
         return $dataResponse;
     }

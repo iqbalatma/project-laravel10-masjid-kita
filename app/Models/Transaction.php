@@ -6,6 +6,7 @@ use App\Enums\StatusTransactionEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -65,6 +66,11 @@ class Transaction extends Model
     public function mosque():BelongsTo
     {
         return $this->belongsTo(Mosque::class);
+    }
+
+    public function transaction_images():HasMany
+    {
+        return $this->hasMany(TransactionImage::class);
     }
 
     public function user()
