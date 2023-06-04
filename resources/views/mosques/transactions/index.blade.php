@@ -21,6 +21,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama Masjid</th>
+                        <th scope="col">Kode Transaksi</th>
                         <th scope="col">Jumlah</th>
                         <th scope="col">Tipe</th>
                         <th scope="col">Metode</th>
@@ -40,6 +41,7 @@
                     @foreach ($transactions as $key => $transaction)
                         <tr>
                             <td>{{ $transactions->firstItem() + $key }}</td>
+                            <td>{{ $transaction->code }}</td>
                             <td>{{ $transaction->mosque?->name }}</td>
                             <td>{{ formatToRupiah($transaction->amount) }}</td>
                             <td>{{ ucwords($transaction->transaction_type->name) }}</td>

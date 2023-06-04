@@ -6,4 +6,5 @@ enum TableEnum:string
 {
     case USERS = "users";
     case TRANSACTION_IMAGES = "transaction_images";
+    case TRANSACTIONS = "transactions";
 }

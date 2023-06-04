@@ -17,12 +17,12 @@ class TransactionRepository extends BaseRepository
         $this->model = new Transaction();
     }
 
-    public function getDataByWhereClausePaginated(array $whereClause, array $columns = ["*"])
+    public function getLastDataTransaction(): ?Transaction
     {
-        return $this->model
-            ->select($columns)
-            ->where($whereClause)
-            ->paginate(request()->query("perpage", config("servicerepo.perpage")));
+        return $this->model->whereMonth("created_at", Carbon::now()->format("m"))
+            ->whereYear("created_at", Carbon::now()->format("Y"))
+            ->latest()
+            ->first();
     }
 
     public function getDataApprovedTransactionPaginated(string $mosqueId, array $columns = ["*"])

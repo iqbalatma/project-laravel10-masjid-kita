@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\Mosques\MosqueTransactionServiceInterface;
 use App\Repositories\TransactionImageRepository;
 use App\Repositories\TransactionRepository;
 use App\Repositories\TransactionTypeRepository;
+use App\Services\Transactions\TransactionService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -77,17 +78,20 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
         try {
             DB::beginTransaction();
             $requestedData["mosque_id"] = $mosqueId;
-            $requestedData["user_id"] = Auth::id();
+            $requestedData["code"] = TransactionService::getGeneratedCode();
 
             $transaction = $this->repository->addNewData($requestedData);
 
-            foreach (request()->file("transaction_images") as $uploadedFile) {
-                $uploaded = Storage::putFile("transactions-images", $uploadedFile);
-                $this->transactionImageRepo->addNewData([
-                    "image" => $uploaded,
-                    "transaction_id" => $transaction->id
-                ]);
+            if (isset($requestedData["transaction_images"])) {
+                foreach (request()->file("transaction_images") as $uploadedFile) {
+                    $uploaded = Storage::putFile("transactions-images", $uploadedFile);
+                    $this->transactionImageRepo->addNewData([
+                        "image" => $uploaded,
+                        "transaction_id" => $transaction->id
+                    ]);
+                }
             }
+
 
             $response = [
                 "success" => true,
@@ -96,7 +100,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            $response = getDefaultErrorResponse();
+            $response = getDefaultErrorResponse($e);
         }
 
         return $response;
@@ -124,7 +128,7 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
                 "success" => true,
             ];
         } catch (Exception $e) {
-            $response = getDefaultErrorResponse();
+            $response = getDefaultErrorResponse($e);
         }
 
         return $response;

@@ -28,7 +28,7 @@ class DashboardService extends BaseService implements  DashboardServiceInterface
                 "description" => "Description",
             ];
         } catch (\Exception $e){
-            $response = getDefaultErrorResponse();
+            $response = getDefaultErrorResponse($e);
         }
 
         return $response;
