@@ -10,6 +10,7 @@ $(function(){
 
         $("#edit-code").val(subdistrict.code);
         $("#edit-name").val(subdistrict.name);
+        $("#edit-district").val(subdistrict.district_id);
 
         changeFormUrlWithId(subdistrict.id, defaultEditUrl, "#form-edit");
     })

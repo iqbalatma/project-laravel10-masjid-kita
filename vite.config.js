@@ -5,9 +5,15 @@ let css = ["resources/css/app.css"];
 
 let js = [
     "resources/js/app.js",
+    "resources/js/pages/dashboard/index.js",
     "resources/js/pages/masters/districts/index.js",
     "resources/js/pages/masters/subdistricts/index.js",
-    "resources/js/pages/masters/roles/index.js",
+    "resources/js/pages/masters/villages/index.js",
+    "resources/js/pages/masters/mosques/index.js",
+    "resources/js/pages/masters/transaction-types/index.js",
+    "resources/js/pages/user-managements/roles/index.js",
+    "resources/js/pages/user-managements/users/index.js",
+    "resources/js/pages/mosques/transactions/index.js",
 ];
 export default defineConfig({
     plugins: [

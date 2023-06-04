@@ -3,7 +3,7 @@
 namespace App\Services\Masters;
 
 use App\Contracts\Interfaces\Masters\DistrictServiceInterface;
-use App\Repositories\Masters\DistrictRepository;
+use App\Repositories\DistrictRepository;
 use App\Services\BaseService;
 use Exception;
 
@@ -48,7 +48,7 @@ class DistrictService extends BaseService implements DistrictServiceInterface
         try {
             $this->checkData($id);
 
-            $district = $this->getData();
+            $district = $this->getServiceEntity();
             $district->fill($requestedData);
             $district->save();
 

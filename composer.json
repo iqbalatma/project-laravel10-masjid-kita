@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "iqbalatma/laravel-service-repo": "^1.0",
         "iqbalatma/sand-trail-driver": "^1.0",
@@ -15,6 +15,7 @@
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",

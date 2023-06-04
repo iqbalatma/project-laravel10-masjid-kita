@@ -3,6 +3,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title">Semua Data Kabupaten</h4>
 
+            @can($accessPermissions["DISTRICT_STORE"])
             <div class="button-group">
                 <!-- Button Add New Data  -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
@@ -10,6 +11,8 @@
                     Tambahkan Kabupaten Baru
                 </button>
             </div>
+            @endcan
+
         </div>
         <div class="card-body table-responsive">
             @if ($districts->count() == 0)
@@ -22,7 +25,9 @@
                         <th scope="col">Kode</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Waktu Ditambahkan</th>
+                        @canany([$accessPermissions["DISTRICT_UPDATE"],$accessPermissions["DISTRICT_DESTROY"]])
                         <th scope="col">Aksi</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -32,16 +37,22 @@
                         <td>{{ $district->code }}</td>
                         <td>{{ ucwords($district->name) }}</td>
                         <td>{{ $district->created_at }}</td>
+                        @canany([$accessPermissions["DISTRICT_UPDATE"],$accessPermissions["DISTRICT_DESTROY"]])
                         <td>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{{ $district }}">
+                            @can($accessPermissions["DISTRICT_UPDATE"])
+                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{"]{ $district }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
+                            @endcan
 
+                            @can($accessPermissions["DISTRICT_DESTROY"])
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ $district->id }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
+                            @endcan
                         </td>
+                        @endcanany
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -51,6 +62,7 @@
         </div>
     </div>
 
+    @can($accessPermissions["DISTRICT_UPDATE"])
     <!-- Modal Edit -->
     <div class=" modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-editLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -60,7 +72,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-edit" class="row g-3" method="POST" action="{{ route('masters.districts.update', ':id') }}">
+                    <form id="form-edit" class="row g-3" method="POST" action="{"]{ route('masters.districts.update', ':id') }}">
                         @csrf
                         @method("PUT")
                         <input type="hidden" name="district_id" value="1">
@@ -81,7 +93,9 @@
             </div>
         </div>
     </div>
+    @endcan
 
+    @can($accessPermissions["DISTRICT_STORE"])
     <!-- Modal Add New Subdistrict-->
     <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-addLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -110,11 +124,15 @@
             </div>
         </div>
     </div>
+    @endcan
 
-    <form id="form-delete" action="{{ route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
+    @can($accessPermissions["DISTRICT_DESTROY"])
+    <form id="form-delete" action="{{route('masters.districts.destroy', ':id') }}" class="d-none" method="POST">
         @csrf
         @method("DELETE")
     </form>
+    @endcan
+
 
     @push("scripts")
     @vite("resources/js/pages/masters/districts/index.js")

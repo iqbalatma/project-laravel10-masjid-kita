@@ -23,8 +23,8 @@ class StoreVillageRequest extends FormRequest
     {
         return [
             "name" => "required|max:255",
-            "population" => "numeric",
             "postcode" => "required|max:5",
+            "subdistrict_id" => "required|numeric"
         ];
     }
 }
