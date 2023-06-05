@@ -43,9 +43,9 @@ class MosqueTransactionService extends BaseMosqueTransactionService implements M
      */
     public function getAllData(int $mosqueId, string $type): array
     {
-        $this->checkAccess($mosqueId);
+        $mosque = $this->mosqueRepo->getDataById($mosqueId);
+        Gate::authorize("store", $mosque);
         $this->addBreadCumbs(["transaksi masjid" => route("mosque.transactions.index", ["mosque_id" => request()->route("mosque_id"), "type" => request()->route("type")])]);
-        $mosque = $this->getMosque();
 
         $dataResponse = [
             "transactionTypes" => $this->transactionTypeRepo->getAllData(),

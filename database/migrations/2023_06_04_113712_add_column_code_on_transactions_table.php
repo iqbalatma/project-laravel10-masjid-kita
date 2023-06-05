@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table(\App\Enums\TableEnum::TRANSACTIONS, function (Blueprint $table){
+        Schema::table(\App\Enums\TableEnum::TRANSACTIONS->value, function (Blueprint $table){
             $table->dropColumn("code");
         });
     }
