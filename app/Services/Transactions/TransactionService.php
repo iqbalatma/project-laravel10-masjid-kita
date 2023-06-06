@@ -83,6 +83,7 @@ class TransactionService extends BaseService implements TransactionServiceInterf
                 ->filterColumn($this->filterablelColumnAll)
                 ->getAllDataPaginated();
         }
+
         return $dataReturn;
     }
 
