@@ -52,7 +52,6 @@
                             <td>
                                 <span @class(['badge rounded-pill', 'bg-success'=> $transaction->status=='approved', 'bg-danger'=> $transaction->status=='rejected', 'bg-warning' => $transaction->status == 'pending'])>{{ ucwords($transaction->status) }}</span>
                             </td>
-
                             <td>{{ $transaction->status_change_at }}</td>
                             <td>{{ $transaction->created_at }}</td>
                             <td>
@@ -73,7 +72,6 @@
                                     </td>
                                 @endcan
                             @endif
-
                         </tr>
                     @endforeach
                     </tbody>

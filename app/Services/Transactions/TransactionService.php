@@ -18,6 +18,7 @@ class TransactionService extends BaseService implements TransactionServiceInterf
     public const DEFAULT_CODE_PREFIX = "TRANS";
 
     private array $filterablelColumnAll;
+    private array $filterablelColumnSubmissions;
 
     public function __construct()
     {
@@ -34,6 +35,11 @@ class TransactionService extends BaseService implements TransactionServiceInterf
             "code" => TableEnum::TRANSACTIONS->value.".code",
         ];
 
+        $this->filterablelColumnSubmissions = [
+            "status" => TableEnum::TRANSACTIONS->value.".status",
+            "transaction_type_id" => TableEnum::TRANSACTIONS->value.".transaction_type_id",
+            "code" => TableEnum::TRANSACTIONS->value.".code",
+        ];
     }
 
     /**
@@ -53,13 +59,26 @@ class TransactionService extends BaseService implements TransactionServiceInterf
             $dataReturn["cardTitle"] = "Data Pengajuan Transaksi Masjid";
             $dataReturn["description"] = "Data Pengajuan transaksi masjid";
             $dataReturn["transactions"] = $this->repository
+                ->whereHas("mosque" , function($q){
+                    $mosqueName= request()->query("mosque_name");
+                    if(isset($mosqueName)){
+                        $q->where("name", "LIKE", "%".request()->query("mosque_name")."%");
+                    }
+                })
                 ->orderBy(["created_at"], "created_at", "DESC")
+                ->filterColumn($this->filterablelColumnSubmissions)
                 ->getAllDataPaginated(["status" => "pending"]);
         } else {
             $dataReturn["title"] = "Semua Transaksi";
             $dataReturn["cardTitle"] = "Data Semua Transaksi Masjid";
             $dataReturn["description"] = "Data semua transaksi masjid";
             $dataReturn["transactions"] = $this->repository
+                ->whereHas("mosque" , function($q){
+                    $mosqueName= request()->query("mosque_name");
+                    if(isset($mosqueName)){
+                        $q->where("name", "LIKE", "%".request()->query("mosque_name")."%");
+                    }
+                })
                 ->orderBy(["created_at"], "status_change_at", "DESC")
                 ->filterColumn($this->filterablelColumnAll)
                 ->getAllDataPaginated();

@@ -7,7 +7,7 @@
             <form class="row g-3 mb-4" id="form-filter" method="GET" action="{{route('transactions.index', 'all')}}">
                 <div class="col-md-3">
                     <label for="mosque_name" class="form-label">Nama Masjid</label>
-                    <input type="text" class="form-control" id="mosque_name" name="mosque_name">
+                    <input type="text" class="form-control" id="mosque_name" name="mosque_name" value="{{request()->query('mosque_name')??''}}">
                 </div>
                 <div class="col-md-3">
                     <input type="hidden" name="filter[columns][1]" value="code">
@@ -49,7 +49,7 @@
             </form>
             <div class="row mb-4">
                 <div class="col-md-3">
-                    <a class="btn btn-secondary" href="{{route('transactions.index', 'all')}}">Reset</a>
+                    <a class="btn btn-secondary" href="{{route('transactions.index', request()->route('type'))}}">Reset</a>
                     <button class="btn btn-primary" form="form-filter" type="submit">Filter</button>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         <tr>
                             <td>{{ $transactions->firstItem() + $key }}</td>
                             <td>{{ $transaction->code }}</td>
-                            <td>{{ $transaction->mosque->name }}</td>
+                            <td>{{ $transaction->mosque?->name }}</td>
                             <td>{{ formatToRupiah($transaction->amount) }}</td>
                             <td>{{ ucwords($transaction->transaction_type->name) }}</td>
                             <td><span @class(['badge rounded-pill', 'bg-success'=> $transaction->method=='income', 'bg-danger'=> $transaction->method=='expense'])>{{ ucwords($transaction->method) }}</span></td>
