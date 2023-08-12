@@ -40,7 +40,7 @@
                         @canany([$accessPermissions["DISTRICT_UPDATE"],$accessPermissions["DISTRICT_DESTROY"]])
                         <td>
                             @can($accessPermissions["DISTRICT_UPDATE"])
-                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{"]{ $district }}">
+                            <button type="button" class="btn btn-success btn-edit" data-bs-toggle="modal" data-bs-target="#modal-edit" data-district="{{ $district }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Sunting
                             </button>
                             @endcan
@@ -72,7 +72,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-edit" class="row g-3" method="POST" action="{"]{ route('masters.districts.update', ':id') }}">
+                    <form id="form-edit" class="row g-3" method="POST" action="{{route('masters.districts.update', ':id') }}">
                         @csrf
                         @method("PUT")
                         <input type="hidden" name="district_id" value="1">
